@@ -1,0 +1,154 @@
+/* -------------------- Case Studies Page Layout -------------------- */
+html, body {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* ✅ prevents horizontal scrolling */
+}
+
+.case-studies-page section {
+    padding: 80px 20px;
+}
+
+.case-study-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.case-study-row.two-col {
+    flex-direction: row;
+}
+
+.case-study-text,
+.case-study-description {
+    flex: 1 1 48%;
+}
+
+.case-study-text h3,
+.case-study-text p {
+    margin-bottom: 16px;
+}
+
+.case-study-text .button-container {
+    margin-top: 20px;
+}
+
+.case-study-section.tighter-top {
+    margin-top: -50px;
+}
+
+.case-study-carousel.tighter-top {
+    margin-top: -20px;
+}
+
+/* 🔧 Fix spacing between REVCAP and its mini-carousel */
+#revcap-section {
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+
+#revcap-section + .mini-carousel-overlay {
+  margin-top: 0;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 768px) {
+    .case-study-row,
+    .case-study-row.two-col {
+      flex-direction: column;
+    }
+
+    .case-study-text,
+    .case-study-description {
+      flex: 1 1 100%;
+    }
+
+    .case-study-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* NEW: add internal padding and vertical margin to containers */
+    #revcap-section .container,
+    #hedgefund-section .container {
+      padding: 0 16px;
+      margin-bottom: 40px;
+    }
+
+    /* NEW: ensure button has bottom space before carousel */
+    .case-study-text .button-container {
+      margin-bottom: 24px;
+    }
+
+    /* NEW: keep mobile carousel spacing clean */
+    .mini-carousel-overlay {
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+
+    /* Optional: adjust card height slightly for mobile carousels */
+    .mini-carousel-overlay .carousel-item {
+      height: 280px;
+    }
+}
+
+/* -------------------- Dark Grey Section Theme -------------------- */
+.dark-grey-section {
+    background-color: #333333 ;
+    color: #E6E6E6;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.dark-grey-section .container {
+    padding: 0 20px;
+    margin-bottom: 0; /* Adjusted to remove extra space */
+}
+
+.dark-grey-section .text-light {
+    color: #E6E6E6;
+}
+
+.dark-grey-section .btn-dark-section-light-outline {
+    border: 2px solid #E6E6E6;
+    color: #E6E6E6;
+}
+
+.dark-grey-section .btn-dark-section-light-outline:hover {
+    background-color: #E6E6E6;
+    color: #808080;
+}
+
+/* -------------------- Full Width Container -------------------- */
+.full-width-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    padding: 0 20px;
+    max-width: none;
+}
+
+/* -------------------- Reinforce Button Styles -------------------- */
+.dark-grey-section .btn-dark-section-light-outline {
+    background-color: #333333 !important;
+    color: #e6e6e6 !important;
+    border: 2px solid #e6e6e6 !important;
+}
+
+.dark-grey-section .btn-dark-section-light-outline:hover {
+    background-color: #e6e6e6 !important;
+    color: #333333 !important;
+}

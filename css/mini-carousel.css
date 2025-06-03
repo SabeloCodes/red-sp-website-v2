@@ -1,0 +1,125 @@
+/* -------------------- Full-Width Mini Carousel Layout -------------------- */
+.mini-carousel-overlay {
+  position: relative;
+  width: 100vw;
+  margin: 10px 0;
+  padding: 10px 0;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+}
+
+.mini-carousel-overlay .carousel-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.5s ease;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* All carousel items - hidden and dimmed by default */
+.mini-carousel-overlay .carousel-item {
+  flex: 0 0 33.3333%;
+  position: relative;
+  display: none;
+  opacity: 0.4;
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  overflow: hidden;
+  height: 400px;
+  background: linear-gradient(135deg, #ebebeb 0%, #dcdcdc 100%);
+  border: 1px solid #ddd;
+  border-radius: 0;
+  order: 0; /* Reset order so JS can override */
+}
+
+/* Image inside item */
+.mini-carousel-overlay .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+}
+
+/* Active item is bright and clickable */
+.mini-carousel-overlay .carousel-item.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  cursor: pointer;
+  display: block; /* Ensure active item is visible */
+  order: 2; /* Active item sits in the center via JS */
+}
+
+.modal-active .carousel-item.active img {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --------------- Arrows ---------------------- */
+.carousel-arrow.mini-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 4.8rem;
+  color: #333333;
+  background: none;
+  border: none;
+  z-index: 10;
+  cursor: pointer;
+  padding: 0 15px;
+  transition: color 0.3s ease;
+}
+
+.carousel-arrow.mini-arrow:hover {
+  color: #d22f2b;
+}
+
+.carousel-arrow.prev.mini-arrow {
+  left: 20px;
+}
+
+.carousel-arrow.next.mini-arrow {
+  right: 20px;
+}
+
+/* Adjust arrow size on small screens */
+@media (max-width: 768px) {
+  .carousel-arrow.mini-arrow {
+    font-size: 3.6rem;
+  }
+}
+
+/* -------------------- Dot Indicators -------------------- */
+
+.carousel-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-dot:hover,
+.carousel-dot.active {
+  background-color: #D22F2B;
+}

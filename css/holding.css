@@ -1,0 +1,150 @@
+/* -------------------- Reset & Base -------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f8f8f8, #ffffff);
+    color: #333;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* -------------------- Watermark Overlay (Optional) -------------------- */
+  .overlay-logo {
+    position: absolute;
+    background: url('img/LOGO/watermark.png') no-repeat center center;
+    background-size: 300px;
+    opacity: 0.03;
+    inset: 0;
+    z-index: 0;
+  }
+  
+  /* -------------------- Container -------------------- */
+  .holding-container {
+    z-index: 1;
+    position: relative;
+    max-width: 500px;
+    margin: 10vh auto;
+    padding: 40px 30px;
+    background: #fff;
+    border: 1px solid #E6E6E6;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    border-radius: 0;
+  }
+  
+  /* -------------------- Logo Wrapper -------------------- */
+  .logo-link {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  /* -------------------- Logo -------------------- */
+  .logo {
+    width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  /* -------------------- Logo Load Animation -------------------- */
+  .animated-logo {
+    opacity: 0;
+    transform: scale(0.9);
+    animation: logoFadeIn 1s ease-out forwards;
+  }
+  @keyframes logoFadeIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* -------------------- Title & Message -------------------- */
+  .title {
+    font-size: 2.5rem;
+    color: #D22F2B;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .message {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  /* -------------------- Button -------------------- */
+  .btn {
+    padding: 12px 25px;
+    border: 2px solid;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    font-size: 0.9rem;
+  }
+  .btn-dark-outline {
+    border-color: #D22F2B;
+    color: #D22F2B;
+  }
+  .btn-dark-outline:hover {
+    background-color: #D22F2B;
+    color: #fff;
+  }
+  
+  /* -------------------- Inline SVG Social Icons -------------------- */
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .social-icons a {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  .social-icons a:hover {
+    transform: translateY(-5px);
+  }
+  .icon {
+    width: 100%;
+    height: 100%;
+    fill: #808080;
+    transition: fill 0.3s ease;
+  }
+  .icon.linkedin:hover {
+    fill: #0077B5;
+  }
+  .icon.facebook:hover {
+    fill: #1877F2;
+  }
+  .icon.instagram:hover {
+    fill: #E4405F;
+  }
+  
+  /* -------------------- Page Fade-In -------------------- */
+  .fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* -------------------- Responsive -------------------- */
+  @media (max-width: 600px) {
+    .holding-container {
+      margin: 60px 20px;
+      padding: 30px 20px;
+    }
+    .title {
+      font-size: 2rem;
+    }
+  }

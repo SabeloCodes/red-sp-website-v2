@@ -1,0 +1,285 @@
+/* -------------------- Navigation Styles -------------------- */
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  z-index: 10;
+  gap: 40px;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-center {
+  flex: 1;
+  justify-content: center;
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo img {
+  height: 130px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo a,
+.logo a img {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* MAIN NAVIGATION MENU */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  border: none;
+}
+
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background-color: #d22f2b;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav ul li a:active::after {
+  width: 100%;
+}
+
+nav ul li a:hover {
+  color: rgba(210, 47, 43, 0.7);
+}
+
+nav a.active {
+  color: #d22f2b;
+  font-weight: bold;
+}
+
+nav a.active::after {
+  display: none;
+}
+
+nav ul li a:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+nav ul li a::-moz-focus-inner {
+  border: 0;
+}
+
+/* SOCIAL ICONS */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-icons a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-5px);
+}
+
+.social-icons a.linkedin {
+  background-image: url('../img/ICONS/social_media_icons/Linkedin-w.png');
+}
+
+.social-icons a.linkedin:hover {
+  background-image: url('../img/ICONS/social_media_icons/LinkedIn-r.png');
+}
+
+.social-icons a.facebook {
+  background-image: url('../img/ICONS/social_media_icons/Facebook-w.png');
+}
+
+.social-icons a.facebook:hover {
+  background-image: url('../img/ICONS/social_media_icons/communication.png');
+}
+
+.social-icons a.instagram {
+  background-image: url('../img/ICONS/social_media_icons/Instagram-w.png');
+}
+
+.social-icons a.instagram:hover {
+  background-image: url('../img/ICONS/social_media_icons/instagram-r.png');
+}
+
+/* Button Click Feedback */
+.btn:active {
+  transform: scale(0.96);
+  transition: transform 0.1s ease;
+}
+
+/* -------------------- Carousel Page Specific Styles -------------------- */
+body.carousel-page .overlay {
+  padding-top: 320px;
+}
+
+body.index-page .overlay {
+  padding-top: 240px; /* Adjust this number to control vertical position */
+}
+
+body.carousel-page .nav-center {
+  transform: translateX(-4%);
+}
+
+/* -------------------- Responsive Styles -------------------- */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+  }
+
+  .logo img {
+    height: 72px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .main-nav {
+    display: none;
+    width: 100%;
+    margin-top: 10px;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 20px;
+  }
+
+  .main-nav.show {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .main-nav ul li {
+    margin: 10px 0;
+  }
+
+  .social-icons {
+    margin-top: 12px;
+    justify-content: flex-start;
+    margin-right: 0;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    align-items: center;
+  }
+
+  .logo img {
+    height: 60px;
+  }
+
+  nav ul {
+    align-items: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+/* -------------------- Hamburger Menu Styles -------------------- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  margin-right: 20px;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

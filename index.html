@@ -1,0 +1,199 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RED Workspace</title>
+
+    <!-- Preload first carousel image for faster load -->
+    <link rel="preload" as="image" href="img/PROJECTS/REV_CAPITAL/HighRes__W9A4780-Edit 1.jpg" />
+
+    <!-- Poppins Font Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/footer.css?v=2">
+
+   <!-- Page Specific Scripts -->
+<script src="js/overlay.js" defer></script>
+<script src="js/carousel.js" defer></script>
+<script src="js/script.js?v=3" defer></script>
+  </head>
+
+
+  <body class="carousel-page index-page"
+  data-carousel-heading="Where Innovation Meets Precision in Every Space"
+  data-carousel-paragraph="Designing and building high-performance commercial interiors that 
+  inspire and deliver."
+  data-carousel-button1="Explore Our Work"
+  data-carousel-button2="Let's Talk">
+    
+  <!-- Navigation -->
+    <header id="navigation"></header>
+
+    <!-- Carousel placeholder (carousel.html will be injected here) -->
+    <div id="carousel-placeholder"></div>
+
+    <!-- Who We Are Section -->
+    <section id="who-we-are" class="section">
+      <div class="container">
+        <h2 class="heading-xl text-red">Who We Are</h2>
+        <p class="text-lg text-dark">
+          Red Workspace was founded by three industry experts with a shared vision to challenge the norm in commercial interiors. With over 50 years of combined experience, we bring together design, project management, and execution to create future-ready workspaces that are as functional as they are inspiring.
+        </p>
+        <div class="button-container">
+            <a href="#" class="btn btn-light-grey-outline btn-animate">MEET THE TEAM</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-width Image -->
+    <div class="who-we-are-image">
+      <img src="img/PROJECTS/REV_CAPITAL/Cropped_office.jpg" alt="Team in Workspace">
+    </div>
+
+    <!-- WHAT WE DO SECTION -->
+    <section id="what-we-do" class="section dark-bg">
+      <div class="container">
+        <h2 class="heading-xl text-light-grey tight-bottom">What We Do</h2>
+        <ul class="services-list">
+          <li class="service-item">
+            <img src="img/ICONS/web_icons/WEBSITE_ICONS-08.png" alt="Workplace Strategy & Design">
+            <h3 class="heading-md text-light-grey">Workplace Strategy & Design</h3>
+          </li>
+          <li class="service-item">
+            <img src="img/ICONS/web_icons/WEBSITE_ICONS-09.png" alt="Project Management">
+            <h3 class="heading-md text-light-grey">Project Management</h3>
+          </li>
+          <li class="service-item">
+            <img src="img/ICONS/web_icons/WEBSITE_ICONS-10.png" alt="Fit-Out & Build">
+            <h3 class="heading-md text-light-grey">Fit-Out & Build</h3>
+          </li>
+          <li class="service-item">
+            <img src="img/ICONS/web_icons/WEBSITE_ICONS-11.png" alt="Bespoke Solutions">
+            <h3 class="heading-md text-light-grey">Bespoke Solutions</h3>
+          </li>
+          <li class="service-item">
+            <img src="img/ICONS/web_icons/WEBSITE_ICONS-12.png" alt="Sustainability Practices">
+            <h3 class="heading-md text-light-grey">Sustainability Practices</h3>
+          </li>
+        </ul>
+        <div class="button-container">
+          <a href="/services" class="btn btn-dark-outline btn-animate">View All Services</a>
+        </div>
+      </div>
+    </section>
+
+    
+   <!-- PORTFOLIO SECTION -->
+<section class="portfolio-section section">
+    <div class="container">
+      <h2 class="heading-xl text-dark">Our Case Studies</h2>
+  
+      <div class="portfolio-carousel">
+        <!-- Slide 1 -->
+        <div class="portfolio-slide active">
+          <div class="portfolio-content">
+            <div class="portfolio-image">
+              <img src="img/PROJECTS/REV_CAPITAL/HighRes__W9A4780-Edit 1.jpg" alt="REVCAP Project" />
+            </div>
+            <div class="portfolio-text">
+              <h3 class="heading-md text-dark text-left">REVCAP</h3>
+              <p class="text-md text-dark text-left">For a longstanding client’s second relocation, Red Workspace provided end-to-end support from initial brief and building selection to budget management and final delivery. The project featured major structural works, including a custom cantilevered staircase, and was completed with bespoke joinery and furniture to create a refined industrial-style London HQ. </p>
+              <a href="/case-studies.html" class="btn btn-light-grey-outline btn-animate">VIEW OUR CASE STUDIES</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Slide 2 -->
+        <div class="portfolio-slide">
+          <div class="portfolio-content">
+            <div class="portfolio-image">
+              <img src="img/PROJECTS/US_HEDGE_FUND/Magnetar_0051-HDR.jpg" alt="US HEDGE FUND Project" />
+            </div>
+            <div class="portfolio-text">
+              <h3 class="heading-md text-dark text-left">US HEDGE FUND</h3>
+              <p class="text-md text-dark text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+              <a href="/case-studies.html" class="btn btn-light-grey-outline btn-animate">VIEW OUR CASE STUDIES</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Arrows and Dots -->
+        <button class="portfolio-prev" aria-label="Previous Slide">&#10094;</button>
+        <button class="portfolio-next" aria-label="Next Slide">&#10095;</button>
+        <div class="portfolio-dots"></div>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- WHY CHOOSE RED SECTION -->
+    <section class="why-red-section">
+      <h2 class="heading-xl text-red">Why Choose RED Workspace?</h2>
+      <div class="why-red-features">
+        <div class="feature-box">
+          <img src="img/ICONS/web_icons/WEBSITE_ICONS-13.png" alt="Tailored Execution Icon">
+          <h3 class="heading-md text-dark">Tailored Execution</h3>
+          <p class="text-md text-dark">Every detail, just right</p>
+        </div>
+        <div class="feature-box">
+          <img src="img/ICONS/web_icons/WEBSITE_ICONS-14.png" alt="Innovative Designs Icon">
+          <h3 class="heading-md text-dark">Innovative Designs</h3>
+          <p class="text-md text-dark">Workspaces that push boundaries</p>
+        </div>
+        <div class="feature-box">
+          <img src="img/ICONS/web_icons/WEBSITE_ICONS-15.png" alt="Collaborative Approach Icon">
+          <h3 class="heading-md text-dark">Collaborative Approach</h3>
+          <p class="text-md text-dark">You’re part of the journey</p>
+        </div>
+      </div>
+      <a href="contact.html" class="btn btn-light-grey-outline btn-animate">LET’S TALK</a>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials-section section">
+        <div class="container">
+          <h2 class="heading-xl text-light">Testimonials</h2>
+      
+          <div class="testimonials-carousel">
+            <div class="testimonial-slide active">
+              <blockquote class="text-lg text-light-grey text-italic">
+                “RedSP’s professionalism and knowledge were invaluable in getting the 
+                project completed on time and to the budget. Together with their 
+                “can-do” attitude, overt helpfulness and demeanour in times of 
+                difficulty contributed to the success of the project. I have no 
+                reservations about recommending them for future projects.”
+              </blockquote>
+              <p class="text-md text-muted italic">— Murray Taylor</p>
+              <p class="text-sm text-muted italic">Project Quantity Surveyor, Arcadis</p>
+            </div>
+      
+            <div class="testimonial-slide">
+              <blockquote class="text-lg text-light-grey text-italic">
+                “RedSP’s professionalism and knowledge were invaluable in getting the 
+                project completed on time and to the budget. Together with their 
+                “can-do” attitude, overt helpfulness and demeanour in times of 
+                difficulty contributed to the success of the project. I have no 
+                reservations about recommending them for future projects.”
+              </blockquote>
+                <p class="text-md text-muted italic">— Murray Taylor</p>
+              <p class="text-sm text-muted italic">Project Quantity Surveyor, Arcadis</p>
+            </div>
+      
+            <button class="prev-testimonial" aria-label="Previous Slide">&#10094;</button>
+            <button class="next-testimonial" aria-label="Next Slide">&#10095;</button>
+          </div>
+        </div>
+      </section>
+
+    <!-- Footer -->
+    <footer id="page-footer"></footer>
+
+  </body>
+</html>

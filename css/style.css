@@ -1,0 +1,357 @@
+/* css/style.css */
+
+/* Reset body and html margins and padding, set default font and prevent horizontal scroll */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #fff; /* Default text color on the carousel */
+  overflow-x: hidden;
+}
+
+/* Global Focus Styles for Accessibility */
+:focus {
+  outline: 2px solid #c0392b;
+  outline-offset: 4px;
+}
+
+/* -------------------- Who We Are Section -------------------- */
+#who-we-are {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 30px;
+  background-color: #e6e6e6;
+  align-items: center;
+}
+
+#who-we-are .container {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 800px;
+}
+
+#who-we-are .button-container {
+  text-align: center;
+}
+
+/* Full-width image section */
+.who-we-are-image {
+  width: 100vw;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.who-we-are-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (min-width: 900px) {
+  #who-we-are {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #who-we-are .container {
+    padding-right: 0;
+  }
+}
+
+/* -------------------- What We Do Section -------------------- */
+#what-we-do {
+  padding: 80px 30px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+}
+
+#what-we-do .services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+}
+
+#what-we-do .service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  text-align: center;
+}
+
+#what-we-do .service-item img {
+  max-width: 250px;
+  height: auto;
+  margin-top: 5px; /* ↓ Decrease this (was 20px or 15px?) */
+  margin-bottom: 0px; /* ↓ Remove or reduce space above */
+}
+
+#what-we-do .button-container {
+  text-align: center;
+}
+
+/* === Portfolio Section === */
+.portfolio-carousel {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.portfolio-slide {
+  display: none;
+  transition: opacity 0.5s ease-in-out;
+}
+.portfolio-slide.active {
+  display: block;
+}
+
+/* Layout for image + text */
+.portfolio-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.portfolio-image {
+  width: 60%;
+  flex: 0 0 70%;
+  margin-left: 20px; /* ← nudges the image right */
+}
+
+.portfolio-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+}
+
+/* Text box overlapping image */
+.portfolio-text {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-5%);
+  width: 500px;
+  background: #e6e6e6;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+  border-radius: 0;
+}
+
+/* ---------- Arrows ---------- */
+.portfolio-prev,
+.portfolio-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 6.4rem; /* Larger size */
+  color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.3s ease, color 0.3s ease;
+  padding: 0 10px; /* Nudges arrows slightly away from each other */
+}
+
+/* Positioning */
+.portfolio-prev {left: -50px;}
+.portfolio-next {right: -50px;}
+
+/* Hover effect */
+.portfolio-prev:hover,
+.portfolio-next:hover {
+  color: #d22f2b;
+  transform: translateY(-50%) scale(1.2); /* Maintain vertical centering on hover */
+}
+
+/* Remove focus outline */
+.portfolio-prev:focus,
+.portfolio-next:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+/* Dots */
+.portfolio-dots {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto 80px; /* 80px of space below the dots */
+}
+.portfolio-dot {
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+}
+.portfolio-dot.active {
+  background: #333;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .portfolio-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .portfolio-text {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: none;
+  }
+
+  .portfolio-prev,
+  .portfolio-next {
+    position: static;
+    font-size: 2.5rem;
+    margin: 10px;
+  }
+}
+
+/* -------------------- Why Choose RED Workspace Section -------------------- */
+.why-red-section {
+  background-color: #e6e6e6;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.why-red-features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.feature-box {
+  max-width: 260px;
+  text-align: center;
+}
+
+.feature-box img {
+  width: 250px;
+  height: auto;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.feature-box p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.lets-talk-button {
+  padding: 14px 36px;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+.lets-talk-button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .why-red-features {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* -------------------- Testimonials Section -------------------- */
+.testimonials-section {
+  background-color: #444;
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.testimonials-carousel {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.testimonial-slide {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  text-align: center;
+  padding: 0 40px;
+}
+
+.testimonial-slide.active {
+  display: block;
+  opacity: 1;
+}
+
+.prev-testimonial,
+.next-testimonial {
+  font-size: 5.4rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+  z-index: 10;
+}
+
+.prev-testimonial:hover,
+.next-testimonial:hover {
+  color: #d22f2b;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-testimonial:focus,
+.next-testimonial:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.prev-testimonial {
+  left: 0;
+}
+
+.next-testimonial {
+  right: 0;
+}
+
+/* -------------------- Responsive -------------------- */
+@media (max-width: 768px) {
+  .testimonials-carousel {
+    padding: 0 20px;
+  }
+
+  .prev-testimonial,
+  .next-testimonial {
+    font-size: 2.4rem;
+    position: static;
+    transform: none;
+    margin: 20px 10px 0;
+  }
+}

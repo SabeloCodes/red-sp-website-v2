@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | RED Workspace</title>
+
+  <!-- Fonts & Shared Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+
+  <!-- Components -->
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/carousel.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+
+    <!-- Page-Specific Styles -->
+  <script src="js/overlay.js" defer></script>
+  
+</head>
+<!-- Scripts -->
+  <script src="js/carousel.js" defer></script>
+  <script src="js/contact.js" defer></script>
+
+
+<body class="contact-page carousel-page index-page"
+  data-carousel-heading="Contact Us"
+  data-carousel-paragraph="At Red Workspace, we’re always ready to talk ideas, projects, or just have a friendly chat about how we can help transform your workspace. Whether you're at the early stages of planning or ready to get started, our team is here to support you every step of the way"
+  data-carousel-button1="GET IN TOUCH"
+  data-carousel-button1-link="#contact-form"
+  data-carousel-button2="FIND OUR OFFICE"
+  data-carousel-button2-link="#page-footer">
+
+  <!-- Navigation -->
+  <header id="navigation"></header>
+
+  <!-- Carousel -->
+  <div id="carousel-placeholder"></div>
+
+  <!-- Contact Form Section -->
+  <section id="contact-form" class="contact-section">
+    <div class="container">
+      <h2 class="heading-xl text-light text-center">We want to hear from you,<br>lets talk.</h2>
+
+      <form class="contact-form" action="https://formspree.io/f/mldbwbgl" method="POST" id="contactForm">
+        <label>
+          <span class="heading-md text-light text-center">NAME</span>
+          <input type="text" name="name" required class="input-wide" />
+        </label>
+      
+        <label>
+          <span class="heading-md text-light text-center">NUMBER</span>
+          <input type="tel" name="phone" required class="input-wide" pattern="[0-9\s]+" title="Please enter numbers only" />
+        </label>
+      
+        <label>
+          <span class="heading-md text-light text-center">EMAIL</span>
+          <input type="email" name="email" required class="input-wide" />
+        </label>
+      
+        <label>
+          <span class="heading-md text-light text-center">MESSAGE</span>
+          <textarea name="message" rows="5" required class="textarea-box"></textarea>
+        </label>
+      
+        <div class="button-wrapper text-center">
+          <button type="submit" class="btn btn-dark-outline btn-animate">SUBMIT</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Thank You Modal -->
+  <div id="thankYouModal" class="thank-you-modal">
+    <div class="modal-content">
+      <button class="close-modal" aria-label="Close Thank You Modal">&times;</button>
+      <p class="text-md text-bold">
+        Thank you for contacting <span style="color: #D22F2B;">Red Workspace</span>.<br>
+        We will be in touch soon.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="page-footer"></footer>
+  
+</body>
+</html>
