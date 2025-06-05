@@ -28,148 +28,121 @@ html {
   }
   
   /* -------------------- The Team Section -------------------- */
-#team-section {
-  background-color: #e6e6e6;
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.team-members-grid {
-  display: flex;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-}
-
-.team-member-segment {
-  flex: 0 1 32%;
-  background-color: #e6e6e6;
-  padding: 20px;
-  box-sizing: border-box;
-  text-align: center;
-  overflow: hidden;
-
-  /* Initial hidden state for animation */
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* When visible via IntersectionObserver */
-.team-member-segment.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Middle member divider lines */
-.middle-member {
-  position: relative;
-  z-index: 1;
-}
-.middle-member::before,
-.middle-member::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background-color: white;
-}
-.middle-member::before {
-  left: 0;
-}
-.middle-member::after {
-  right: 0;
-}
-
-/* Circular Image */
-.team-member-image {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: #ccc;
-}
-.team-member-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s ease;
-}
-.team-member-image:hover img {
-  transform: scale(1.05);
-}
-
-/* Contact Details */
-.contact-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin: 15px 0;
-}
-.icon-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.icon-row img {
-  width: 32px;
-  height: auto;
-  filter: brightness(0) saturate(100%) invert(13%) sepia(4%) saturate(547%) hue-rotate(0deg) brightness(93%) contrast(89%);
-  transition: filter 0.3s ease;
-}
-.icon-row img:hover {
-  filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(748%) hue-rotate(-3deg) brightness(96%) contrast(94%);
-}
-
-/* LinkedIn Button */
-.btn-icon-only {
-  width: 60px;
-  height: 60px;
-  padding: 0;
-  background-color: #e6e6e6;
-  border: 2px solid #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.btn-icon-only img.icon-only-img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  transition: filter 0.3s ease;
-}
-.btn-icon-only:hover {
-  background-color: #000;
-  border-color: #000;
-}
-.btn-icon-only:hover img.icon-only-img {
-  filter: brightness(0) invert(1);
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
+  #team-section {
+    background-color: #e6e6e6;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
   .team-members-grid {
-    flex-wrap: wrap;
-    gap: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-
+  
   .team-member-segment {
-    flex: 1 1 100%;
-    max-width: 100%;
+    flex: 0 1 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #e6e6e6;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-
-  .middle-member::before,
-  .middle-member::after {
-    display: none;
+  
+  .team-member-segment.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
-}
+  
+  /* White divider between Bruno and Peter */
+  .team-member-segment:first-child::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 4px;
+    background-color: white;
+  }
+  
+  /* Contact styles */
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .icon-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .icon-row img {
+    width: 32px;
+    height: auto;
+    filter: brightness(0) saturate(100%) invert(13%) sepia(4%) saturate(547%) hue-rotate(0deg) brightness(93%) contrast(89%);
+    transition: filter 0.3s ease;
+  }
+  
+  .icon-row img:hover {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(748%) hue-rotate(-3deg) brightness(96%) contrast(94%);
+  }
+  
+  /* LinkedIn Button */
+  .btn-icon-only {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    background-color: #e6e6e6;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .btn-icon-only img.icon-only-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+  }
+  
+  .btn-icon-only:hover {
+    background-color: #000;
+    border-color: #000;
+  }
+  
+  .btn-icon-only:hover img.icon-only-img {
+    filter: brightness(0) invert(1);
+  }
+  
+  /* Responsive: stack vertically on smaller screens */
+  @media (max-width: 1024px) {
+    .team-members-grid {
+      flex-direction: column;
+    }
+  
+    .team-member-segment {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  
+    .team-member-segment:first-child::after {
+      display: none;
+    }
+  }
   
   /* -------------------- Carousel (Same as Homepage) -------------------- */
   #carousel-container {
