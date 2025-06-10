@@ -1,17 +1,13 @@
-// js/overlay.js
-
 function setupCarouselOverlay() {
   const carousel = document.querySelector("#carousel-container");
   if (!carousel) return;
 
-  // Use a MutationObserver to wait for the overlay to be injected
   const observer = new MutationObserver(() => {
     const overlay = carousel.querySelector(".overlay");
     if (!overlay) return;
 
-    observer.disconnect(); // Stop watching once overlay is present
+    observer.disconnect();
 
-    // Add page-specific overlay class
     const path = window.location.pathname;
     if (path.includes("who-we-are")) {
       overlay.classList.add("overlay-who-we-are");
@@ -21,14 +17,14 @@ function setupCarouselOverlay() {
       overlay.classList.add("overlay-case-studies");
     } else if (path.includes("contact")) {
       overlay.classList.add("overlay-contact");
-    } else if (path.endsWith("/") || path.endsWith("/index.html") || path === "") {
+    } else {
       overlay.classList.add("overlay-home");
     }
 
-    // Inject overlay content from body dataset
     const heading = document.getElementById("carousel-heading");
     const paragraph = document.getElementById("carousel-paragraph");
-    const buttons = overlay.querySelectorAll(".btn");
+    const btn1 = document.querySelector("#carousel-btn-1");
+    const btn2 = document.querySelector("#carousel-btn-2");
 
     const {
       carouselHeading,
@@ -37,17 +33,22 @@ function setupCarouselOverlay() {
       carouselButton2,
     } = document.body.dataset;
 
-    if (heading && carouselHeading) heading.textContent = carouselHeading;
-    if (paragraph && carouselParagraph) paragraph.textContent = carouselParagraph;
-    if (buttons[0] && carouselButton1) buttons[0].textContent = carouselButton1;
-    if (buttons[1] && carouselButton2) buttons[1].textContent = carouselButton2;
+    if (heading && carouselHeading) heading.innerHTML = carouselHeading;
+    if (paragraph && carouselParagraph) paragraph.innerHTML = carouselParagraph;
+    if (btn1 && carouselButton1) btn1.innerHTML = carouselButton1;
+    if (btn2 && carouselButton2) btn2.innerHTML = carouselButton2;
 
-    buttons.forEach(btn => btn.classList.add("btn-animate"));
+    // Log for debugging
+    console.log("[Overlay] Injected content:", {
+      heading: carouselHeading,
+      paragraph: carouselParagraph,
+      btn1: carouselButton1,
+      btn2: carouselButton2
+    });
   });
 
   observer.observe(carousel, { childList: true, subtree: true });
 
-  // Optional: start carousel loop
   if (typeof startCarouselLoop === "function") {
     startCarouselLoop();
   }

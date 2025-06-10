@@ -1,11 +1,9 @@
-/* css/style.css */
-
-/* Reset body and html margins and padding, set default font and prevent horizontal scroll */
+/* -------------------- Base -------------------- */
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  color: #fff; /* Default text color on the carousel */
+  color: #fff;
   overflow-x: hidden;
 }
 
@@ -50,17 +48,6 @@ body, html {
   display: block;
 }
 
-@media (min-width: 900px) {
-  #who-we-are {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #who-we-are .container {
-    padding-right: 0;
-  }
-}
-
 /* -------------------- What We Do Section -------------------- */
 #what-we-do {
   padding: 80px 30px;
@@ -91,15 +78,19 @@ body, html {
 #what-we-do .service-item img {
   max-width: 250px;
   height: auto;
-  margin-top: 5px; /* ↓ Decrease this (was 20px or 15px?) */
-  margin-bottom: 0px; /* ↓ Remove or reduce space above */
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+#what-we-do .service-item h3 {
+  margin-top: 8px;
 }
 
 #what-we-do .button-container {
   text-align: center;
 }
 
-/* === Portfolio Section === */
+/* -------------------- Portfolio Section -------------------- */
 .portfolio-carousel {
   position: relative;
   max-width: 1100px;
@@ -114,7 +105,6 @@ body, html {
   display: block;
 }
 
-/* Layout for image + text */
 .portfolio-content {
   position: relative;
   display: flex;
@@ -125,7 +115,7 @@ body, html {
 .portfolio-image {
   width: 60%;
   flex: 0 0 70%;
-  margin-left: 20px; /* ← nudges the image right */
+  margin-left: 20px;
 }
 
 .portfolio-image img {
@@ -135,7 +125,6 @@ body, html {
   border-radius: 0;
 }
 
-/* Text box overlapping image */
 .portfolio-text {
   position: absolute;
   right: 0;
@@ -149,34 +138,40 @@ body, html {
   border-radius: 0;
 }
 
-/* ---------- Arrows ---------- */
+/* Button fix for mobile */
+.portfolio-text .btn {
+  width: fit-content;
+  padding: 10px 20px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Arrows */
 .portfolio-prev,
 .portfolio-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 6.4rem; /* Larger size */
+  font-size: 6.4rem;
   color: black;
   background: none;
   border: none;
   cursor: pointer;
   z-index: 5;
   transition: transform 0.3s ease, color 0.3s ease;
-  padding: 0 10px; /* Nudges arrows slightly away from each other */
+  padding: 0 10px;
 }
 
-/* Positioning */
-.portfolio-prev {left: -50px;}
-.portfolio-next {right: -50px;}
+.portfolio-prev { left: -50px; }
+.portfolio-next { right: -50px; }
 
-/* Hover effect */
 .portfolio-prev:hover,
 .portfolio-next:hover {
   color: #d22f2b;
-  transform: translateY(-50%) scale(1.2); /* Maintain vertical centering on hover */
+  transform: translateY(-50%) scale(1.2);
 }
 
-/* Remove focus outline */
 .portfolio-prev:focus,
 .portfolio-next:focus {
   outline: none;
@@ -188,7 +183,7 @@ body, html {
 .portfolio-dots {
   display: flex;
   justify-content: center;
-  margin: 40px auto 80px; /* 80px of space below the dots */
+  margin: 40px auto 40px;
 }
 .portfolio-dot {
   width: 12px;
@@ -202,30 +197,7 @@ body, html {
   background: #333;
 }
 
-/* Mobile */
-@media screen and (max-width: 768px) {
-  .portfolio-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .portfolio-text {
-    position: static;
-    transform: none;
-    width: 100%;
-    margin-top: 20px;
-    box-shadow: none;
-  }
-
-  .portfolio-prev,
-  .portfolio-next {
-    position: static;
-    font-size: 2.5rem;
-    margin: 10px;
-  }
-}
-
-/* -------------------- Why Choose RED Workspace Section -------------------- */
+/* -------------------- Why RED -------------------- */
 .why-red-section {
   background-color: #e6e6e6;
   text-align: center;
@@ -257,25 +229,7 @@ body, html {
   color: #333;
 }
 
-.lets-talk-button {
-  padding: 14px 36px;
-  font-size: 1.1rem;
-  margin-top: 10px;
-}
-
-.lets-talk-button:hover {
-  background-color: #333;
-  color: #fff;
-}
-
-@media (max-width: 768px) {
-  .why-red-features {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-/* -------------------- Testimonials Section -------------------- */
+/* -------------------- Testimonials -------------------- */
 .testimonials-section {
   background-color: #444;
   color: #fff;
@@ -315,8 +269,6 @@ body, html {
   transform: translateY(-50%);
   padding: 10px;
   transition: color 0.3s ease, transform 0.3s ease;
-  line-height: 1;
-  font-family: Arial, sans-serif;
   z-index: 10;
 }
 
@@ -326,23 +278,48 @@ body, html {
   transform: translateY(-50%) scale(1.1);
 }
 
-.prev-testimonial:focus,
-.next-testimonial:focus {
-  outline: none;
-  box-shadow: none;
-  border: none;
-}
-
-.prev-testimonial {
-  left: 0;
-}
-
-.next-testimonial {
-  right: 0;
-}
+.prev-testimonial { left: 0; }
+.next-testimonial { right: 0; }
 
 /* -------------------- Responsive -------------------- */
 @media (max-width: 768px) {
+  #what-we-do .services-list {
+    gap: 20px;
+  }
+
+  #what-we-do .service-item h3 {
+    font-size: 1rem;
+  }
+
+  #what-we-do .service-item img {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .portfolio-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .portfolio-text {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: none;
+  }
+
+  .portfolio-prev,
+  .portfolio-next {
+    position: static;
+    font-size: 2.5rem;
+    margin: 10px;
+  }
+
+  .portfolio-text .btn {
+    max-width: 90%;
+  }
+
   .testimonials-carousel {
     padding: 0 20px;
   }
