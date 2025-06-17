@@ -21,17 +21,26 @@ document.addEventListener("DOMContentLoaded", () => {
   function highlightActiveNav() {
     // Normalize current path
     let currentPath = window.location.pathname.toLowerCase().replace(/^\/|\/$/g, '');
-    currentPath = currentPath || 'index'; // Default to 'index' for home
+    currentPath = currentPath.split('/').pop() || 'index.html'; // Get last segment or 'index.html'
+    currentPath = currentPath.replace('.html', ''); // Remove .html for comparison
     console.log('Current Path:', currentPath); // Debug log
 
     document.querySelectorAll('nav.main-nav a').forEach(link => {
       let linkPath = link.getAttribute('href').toLowerCase().replace(/^\/|\/$/g, '');
-      linkPath = linkPath.replace('.html', ''); // Handle .html or clean URLs
+      linkPath = linkPath.split('/').pop().replace('.html', ''); // Get last segment, remove .html
       console.log('Link Path:', linkPath, 'for link:', link.textContent); // Debug log
 
-      if (linkPath === currentPath || (currentPath === 'index' && linkPath === '')) {
+      // Highlight dropdown item or parent 'SERVICES' if on a sub-page
+      const isServicesSubPage = currentPath.startsWith('services') && linkPath === currentPath;
+      const isServicesParent = currentPath.startsWith('services') && linkPath === 'services';
+      if (isServicesSubPage || isServicesParent || linkPath === currentPath) {
         link.classList.add('active');
         console.log('Active link set:', link.textContent); // Debug log
+        // If a dropdown item is active, also activate parent 'SERVICES'
+        if (isServicesSubPage) {
+          const parentServices = document.querySelector('a[href="services.html"]');
+          if (parentServices) parentServices.classList.add('active');
+        }
       } else {
         link.classList.remove('active');
       }
@@ -48,6 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
         mainNav.classList.toggle("show");
         highlightActiveNav(); // Re-apply active class
       });
+
+      // Toggle dropdown on click for mobile
+      const servicesToggle = document.querySelector(".dropdown-toggle");
+      if (servicesToggle) {
+        servicesToggle.addEventListener("click", (e) => {
+          if (window.innerWidth <= 768) {
+            e.preventDefault(); // Prevent navigation on click
+            const parentLi = servicesToggle.parentElement;
+            parentLi.classList.toggle("active");
+            highlightActiveNav(); // Re-apply active class
+          }
+        });
+      }
     }
   }
 });
