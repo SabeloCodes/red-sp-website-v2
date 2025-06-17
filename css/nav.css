@@ -1,5 +1,4 @@
 /* -------------------- Navigation Styles -------------------- */
-
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -49,7 +48,7 @@
 }
 
 /* MAIN NAVIGATION MENU */
-nav ul {
+nav.main-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -59,55 +58,51 @@ nav ul {
   gap: 18px;
 }
 
-nav ul li a {
+nav.main-nav ul li a {
   text-decoration: none;
   color: #fff;
   font-size: 1.2em;
   font-weight: bold;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: color 0.3s ease, opacity 0.3s ease;
   position: relative;
-  overflow: hidden;
-  outline: none;
-  border: none;
+  opacity: 0.6;
 }
 
-nav ul li a::after {
+nav.main-nav ul li a:hover {
+  color: #d22f2b;
+  opacity: 1;
+}
+
+nav.main-nav ul li a::after {
   content: "";
   position: absolute;
   bottom: -2px;
   left: 50%;
-  width: 0%;
+  width: 0;
   height: 2px;
   background-color: #d22f2b;
-  transition: all 0.3s ease;
+  transition: width 0.3s ease;
   transform: translateX(-50%);
 }
 
-nav ul li a:active::after {
+nav.main-nav ul li a:hover::after {
   width: 100%;
 }
 
-nav ul li a:hover {
-  color: rgba(210, 47, 43, 0.7);
-}
-
-nav a.active {
-  color: #d22f2b;
+nav.main-nav ul li a.active {
+  color: #d22f2b !important;
+  opacity: 1;
   font-weight: bold;
 }
 
-nav a.active::after {
+nav.main-nav ul li a.active::after {
   display: none;
 }
 
-nav ul li a:focus {
+nav.main-nav ul li a:focus {
   outline: none;
   border: none;
   box-shadow: none;
-}
-
-nav ul li a::-moz-focus-inner {
-  border: 0;
 }
 
 /* SOCIAL ICONS */
@@ -153,25 +148,6 @@ nav ul li a::-moz-focus-inner {
 
 .social-icons a.instagram:hover {
   background-image: url('../img/ICONS/social_media_icons/instagram-r.png');
-}
-
-/* Button Click Feedback */
-.btn:active {
-  transform: scale(0.96);
-  transition: transform 0.1s ease;
-}
-
-/* -------------------- Carousel Page Specific Styles -------------------- */
-body.carousel-page .overlay {
-  padding-top: 320px;
-}
-
-body.index-page .overlay {
-  padding-top: 240px; /* Adjust this number to control vertical position */
-}
-
-body.carousel-page .nav-center {
-  transform: translateX(-4%);
 }
 
 /* -------------------- Responsive Styles -------------------- */
@@ -230,7 +206,7 @@ body.carousel-page .nav-center {
     height: 60px;
   }
 
-  nav ul {
+  nav.main-nav ul {
     align-items: center;
   }
 
@@ -261,15 +237,15 @@ body.carousel-page .nav-center {
   transition: all 0.3s ease;
 }
 
-.hamburger.active span:nth-child(1) {
+.hamburger.open span:nth-child(1) {
   transform: translateY(9px) rotate(45deg);
 }
 
-.hamburger.active span:nth-child(2) {
+.hamburger.open span:nth-child(2) {
   opacity: 0;
 }
 
-.hamburger.active span:nth-child(3) {
+.hamburger.open span:nth-child(3) {
   transform: translateY(-9px) rotate(-45deg);
 }
 
