@@ -40,39 +40,50 @@ html, body {
     border-color: #000;
   }
   
-  /* -------------------- Why Red Workspace Section -------------------- */
-  
-  .why-red-section {
-    background-color: #e6e6e6;
-    padding: 80px 20px;
-    margin-top: 0; /* prevent overlap with previous element */
+  /* -------------------- Why Red SP Section -------------------- */
+#why-red-sp {
+  background-color: #e6e6e6;
+  padding: 80px 20px;
+  margin-top: 0; /* prevent overlap with previous element */
+}
+
+#why-red-sp .why-red-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+#why-red-sp .why-red-item {
+  flex: 1 1 30%;
+}
+
+#why-red-sp .why-red-item img {
+  width: 250px;
+  height: auto;
+  margin-bottom: 20px;
+  filter: brightness(0) saturate(100%) invert(19%) sepia(99%) saturate(1761%) hue-rotate(345deg) brightness(98%) contrast(91%);
+  /* This filter approximates #d22f2b on monochrome icons */
+}
+
+#why-red-sp .button-container {
+  margin-top: 50px;
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #why-red-sp .why-red-grid {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .why-red-grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    flex-wrap: wrap;
-    text-align: center;
+
+  #why-red-sp .why-red-item {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
-  
-  .why-red-item {
-    flex: 1 1 30%;
-  }
-  
-  /* --- Updated icon color and size --- */
-.why-red-item img {
-    width:250px;
-    height: auto;
-    margin-bottom: 20px;
-    filter: brightness(0) saturate(100%) invert(19%) sepia(99%) saturate(1761%) hue-rotate(345deg) brightness(98%) contrast(91%);
-    /* This filter approximates #d22f2b on monochrome icons */
-  }
-  
-  .why-red-section .button-container {
-    margin-top: 50px;
-    margin-bottom: 0;
-  }
+}
   
   /* -------------------- Full Width Image Section -------------------- */
   /* Fix overlap: ensure full-width image and following section have spacing */
