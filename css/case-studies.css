@@ -1,4 +1,4 @@
-/* -------------------- Case Studies Page Layout -------------------- */
+/* -------------------- Global Page Setup -------------------- */
 html, body {
   margin: 0;
   padding: 0;
@@ -6,9 +6,11 @@ html, body {
   outline: none;
   box-shadow: none;
   scroll-behavior: smooth;
-  overflow-x: hidden; /* ✅ prevents horizontal scrolling */
+  overflow-x: hidden;
+  background-color: #E6E6E6; /* Set background to match US HEDGE FUND theme */
 }
 
+/* -------------------- General Layout -------------------- */
 .case-studies-page section {
   padding: 80px 20px;
 }
@@ -36,8 +38,10 @@ html, body {
 
 .case-study-text .button-container {
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
+/* -------------------- Spacing Fixes -------------------- */
 .case-study-section.tighter-top {
   margin-top: -50px;
 }
@@ -46,29 +50,69 @@ html, body {
   margin-top: -20px;
 }
 
-/* 🔧 Fix spacing between REVCAP and its mini-carousel */
+/* -------------------- REVCAP Styles -------------------- */
 #revcap-section {
-margin-bottom: 0;
-padding-bottom: 20px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 #revcap-section + .mini-carousel-overlay {
-margin-top: 0;
+  margin-top: 0;
+  border: 2px solid #333333;
+  background-color: #333333;
+  padding: 20px 20px 10px;
+  box-sizing: border-box;
 }
 
-/* 🔧 Fix spacing after US HEDGE FUND mini-carousel */
+#revcap-section + .case-study-carousel {
+  background-color: #333333; /* Ensure background matches border */
+}
+
+#revcap-section + .mini-carousel-overlay .carousel-track {
+  background-color: #333333; /* Eliminate white frame behind items */
+}
+
+#revcap-section + .mini-carousel-overlay .carousel-item {
+  background-color: #333333;
+  padding: 0;
+  margin: 0;
+}
+
+#revcap-section + .mini-carousel-overlay .carousel-item img {
+  border: 4px solid #333333 !important;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optional: Hide arrow outlines/borders if visible */
+#revcap-section + .mini-carousel-overlay .carousel-arrow {
+  border: none;
+  outline: none;
+}
+
+/* -------------------- US HEDGE FUND Styles -------------------- */
 #hedgefund-section {
-margin-bottom: 0;
-padding-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-#hedgefund-section + .mini-carousel-overlay {
-margin-top: 0;
-margin-bottom: 0;
-padding-bottom: 0;
+#hedgefund-section .mini-carousel-overlay {
+  border: 2px solid #E6E6E6;
+  background-color: #E6E6E6;
+  padding: 20px 20px 10px;
+  box-sizing: border-box;
 }
 
-/* Responsive layout */
+#hedgefund-section .mini-carousel-overlay .carousel-item img {
+  border: 2px solid #E6E6E6;
+  box-sizing: border-box;
+  display: block;
+}
+
+/* -------------------- Responsive Adjustments -------------------- */
 @media screen and (max-width: 768px) {
   .case-study-row,
   .case-study-row.two-col {
@@ -85,33 +129,62 @@ padding-bottom: 0;
     align-items: center;
   }
 
-  /* NEW: add internal padding and vertical margin to containers */
   #revcap-section .container,
   #hedgefund-section .container {
     padding: 0 16px;
     margin-bottom: 40px;
   }
 
-  /* NEW: ensure button has bottom space before carousel */
   .case-study-text .button-container {
-    margin-bottom: 24px;
+    margin-bottom: 10px;
   }
 
-  /* NEW: keep mobile carousel spacing clean */
   .mini-carousel-overlay {
     margin-top: 0;
     margin-bottom: 40px;
   }
 
-  /* Optional: adjust card height slightly for mobile carousels */
   .mini-carousel-overlay .carousel-item {
     height: 280px;
   }
+
+  /* REVCAP mobile overrides */
+  #revcap-section + .mini-carousel-overlay .carousel-item {
+    background-color: #333333;
+    padding: 0;
+    margin: 0;
+  }
+
+  #revcap-section + .mini-carousel-overlay .carousel-track {
+    background-color: #333333;
+  }
+
+  #revcap-section + .mini-carousel-overlay .carousel-item img {
+    border: 4px solid #333333 !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #revcap-section + .mini-carousel-overlay .carousel-arrow {
+    border: none;
+    outline: none;
+  }
+
+  /* US HEDGE FUND mobile image borders */
+  #hedgefund-section .mini-carousel-overlay .carousel-item img {
+    border: 2px solid #E6E6E6;
+  }
+
+  #revcap-section .mini-carousel-overlay,
+  #hedgefund-section .mini-carousel-overlay {
+    padding-bottom: 10px;
+  }
 }
 
-/* -------------------- Dark Grey Section Theme -------------------- */
+/* -------------------- Dark Grey CTA Section -------------------- */
 .dark-grey-section {
-  background-color: #333333 ;
+  background-color: #333333;
   color: #E6E6E6;
   width: 100vw;
   position: relative;
@@ -124,7 +197,7 @@ padding-bottom: 0;
 
 .dark-grey-section .container {
   padding: 0 20px;
-  margin-bottom: 0; /* Adjusted to remove extra space */
+  margin-bottom: 0;
 }
 
 .dark-grey-section .text-light {
@@ -132,16 +205,17 @@ padding-bottom: 0;
 }
 
 .dark-grey-section .btn-dark-section-light-outline {
-  border: 2px solid #E6E6E6;
+  background-color: #333333;
   color: #E6E6E6;
+  border: 2px solid #E6E6E6;
 }
 
 .dark-grey-section .btn-dark-section-light-outline:hover {
   background-color: #E6E6E6;
-  color: #808080;
+  color: #333333;
 }
 
-/* -------------------- Full Width Container -------------------- */
+/* -------------------- Utility: Full Width Container -------------------- */
 .full-width-container {
   width: 100vw;
   position: relative;
@@ -151,16 +225,4 @@ padding-bottom: 0;
   box-sizing: border-box;
   padding: 0 20px;
   max-width: none;
-}
-
-/* -------------------- Reinforce Button Styles -------------------- */
-.dark-grey-section .btn-dark-section-light-outline {
-  background-color: #333333 !important;
-  color: #e6e6e6 !important;
-  border: 2px solid #e6e6e6 !important;
-}
-
-.dark-grey-section .btn-dark-section-light-outline:hover {
-  background-color: #e6e6e6 !important;
-  color: #333333 !important;
 }
