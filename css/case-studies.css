@@ -112,6 +112,21 @@ html, body {
   display: block;
 }
 
+
+/* -------------------- RICHARD MILLE Styles -------------------- */
+#richard-section .mini-carousel-overlay {
+  border: 2px solid #E6E6E6;
+  background-color: #E6E6E6;
+  padding: 20px 20px 10px;
+  box-sizing: border-box;
+}
+
+#richard-section .mini-carousel-overlay .carousel-item img {
+  border: 2px solid #E6E6E6;
+  box-sizing: border-box;
+  display: block;
+}
+
 /* -------------------- Responsive Adjustments -------------------- */
 @media screen and (max-width: 768px) {
   .case-study-row,
