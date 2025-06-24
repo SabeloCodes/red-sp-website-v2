@@ -50,4 +50,55 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.2 });
 
   animatedItems.forEach((el) => observer.observe(el));
+
+  // -------------------- Portfolio Carousel Logic --------------------
+  const slides = document.querySelectorAll('.portfolio-slide');
+  const prevBtn = document.querySelector('.portfolio-prev');
+  const nextBtn = document.querySelector('.portfolio-next');
+  const dotsContainer = document.querySelector('.portfolio-dots');
+
+  if (slides.length) {
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) slide.classList.add('active');
+      });
+
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('button');
+        dots.forEach((dot, i) => {
+          dot.classList.remove('active');
+          if (i === index) dot.classList.add('active');
+        });
+      }
+    }
+
+    function createDots() {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        if (i === currentIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          currentIndex = i;
+          showSlide(currentIndex);
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    createDots();
+
+    prevBtn?.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(currentIndex);
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    });
+
+    showSlide(currentIndex);
+  }
 });
