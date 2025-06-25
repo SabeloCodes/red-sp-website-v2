@@ -281,6 +281,14 @@ body, html {
 .prev-testimonial { left: 0; }
 .next-testimonial { right: 0; }
 
+/* Removing red border on Testimonials arrows */
+.prev-testimonial:focus,
+.next-testimonial:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
 /* -------------------- Responsive -------------------- */
 @media (max-width: 768px) {
   #what-we-do .services-list {
