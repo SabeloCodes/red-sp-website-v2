@@ -109,17 +109,44 @@ document.addEventListener("DOMContentLoaded", () => {
           const target = document.querySelector('#portfolio-section');
 
           if (target) {
-            // Smooth scroll to portfolio section
             target.scrollIntoView({ behavior: 'smooth' });
-
-            // Delay to allow scroll, then update slide
             setTimeout(() => {
               currentIndex = index;
               showSlide(currentIndex);
-            }, 600); // Adjust if scroll duration changes
+            }, 600);
           }
         });
       });
+    }
+
+    // -------------------- Touch Drag Support --------------------
+    let startX = 0;
+    let endX = 0;
+    const carousel = document.querySelector('.portfolio-carousel');
+
+    if (carousel) {
+      carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      });
+
+      carousel.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+      });
+    }
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          currentIndex = (currentIndex + 1) % slides.length;
+        } else {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        }
+        showSlide(currentIndex);
+      }
     }
   }
 });
