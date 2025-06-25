@@ -19,7 +19,26 @@ html, body {
   text-align: center;
 }
 
-/* Services Page Specific Overlay Styling */
+/* -------------------- Utility Spacing Classes -------------------- */
+.spacing-top-md {
+  margin-top: 24px !important;
+}
+
+.spacing-bottom-md {
+  margin-bottom: 24px !important;
+}
+
+/* -------------------- The Process Section Fixes -------------------- */
+.process-step .text-block {
+  display: block;
+}
+
+.process-step .text-block h3,
+.process-step .text-block p {
+  margin: 0; /* Reset inherited or browser default spacing */
+}
+
+/* -------------------- Services Page Specific Overlay Styling -------------------- */
 body.services-page .overlay .logo-overlay h1 {
   color: #ffffff !important;
 }
@@ -87,7 +106,6 @@ body.services-page .overlay .logo-overlay p {
   height: auto;
   margin: 0;
   padding: 0;
-  line-height: 0;
   border: none;
 }
 
@@ -114,7 +132,9 @@ body.services-page .overlay .logo-overlay p {
 }
 
 .process-step {
-  display: block;
+  display: flex;
+  align-items: center; /* Reverted to center for vertical alignment */
+  text-align: left;
   max-width: 700px;
   width: 100%;
   margin: 0 auto 20px;
@@ -123,15 +143,24 @@ body.services-page .overlay .logo-overlay p {
 .process-step img {
   width: 150px;
   height: auto;
-  margin-bottom: 15px;
+  margin-right: 20px;
 }
 
 .process-step h3 {
-  margin-bottom: 8px;
+  margin-bottom: 24px !important; /* Direct spacing rule */
 }
 
 .process-step p {
-  margin-bottom: 0;
+  margin-top: 24px !important; /* Direct spacing rule */
+}
+
+/* Keep utility classes for consistency */
+.process-step .spacing-bottom-md {
+  margin-bottom: 24px !important;
+}
+
+.process-step .spacing-top-md {
+  margin-top: 24px !important;
 }
 
 .the-process-section .button-container {
@@ -165,23 +194,21 @@ body.services-page .overlay .logo-overlay p {
 
 /* -------------------- Portfolio Section (Case Studies) -------------------- */
 .portfolio-section {
-  background-color: #fff; /* White background */
-  padding: 80px 0; /* Adjusted padding */
-  color: #333; /* Dark text for contrast */
+  background-color: #fff;
+  padding: 80px 0;
+  color: #333;
 }
 
 .portfolio-section .heading-xl {
   text-align: center;
   margin-bottom: 60px;
-  color: #333; /* Match desired text color */
+  color: #333;
 }
 
-/* Carousel container */
 .portfolio-carousel {
   position: relative;
 }
 
-/* Individual slide */
 .portfolio-slide {
   display: none;
   transition: opacity 0.5s ease;
@@ -192,26 +219,24 @@ body.services-page .overlay .logo-overlay p {
   opacity: 1;
 }
 
-/* Layout for image and text */
 .portfolio-content {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 20px; /* Reduced gap for compact layout */
+  gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 100px; /* Increased padding to accommodate arrows */
+  padding: 0 100px;
   box-sizing: border-box;
 }
 
-/* Image container */
 .portfolio-image {
-  flex: 1 1 55%; /* Slightly bigger image */
+  flex: 1 1 55%;
   min-width: 300px;
   max-width: 600px;
-  position: relative; /* Enable z-index context */
-  z-index: 0; /* Base layer */
+  position: relative;
+  z-index: 0;
 }
 
 .portfolio-image img {
@@ -222,39 +247,37 @@ body.services-page .overlay .logo-overlay p {
   box-shadow: none;
 }
 
-/* Text block styling */
 .portfolio-text {
-  flex: 1 1 40%; /* Slightly smaller textbox */
-  background-color: #E6E6E6; /* Light gray background */
-  padding: 30px 20px; /* Adjusted padding for compactness */
+  flex: 1 1 40%;
+  background-color: #E6E6E6;
+  padding: 30px 20px;
   box-sizing: border-box;
-  text-align: center; /* Centered text */
-  color: #333333; /* Dark text */
-  margin-left: -80px; /* Increased overlap */
-  z-index: 1; /* Bring text above image */
+  text-align: center;
+  color: #333333;
+  margin-left: -80px;
+  z-index: 1;
 }
 
 .portfolio-text h3 {
   font-size: 28px;
   font-weight: 800;
   margin-bottom: 20px;
-  color: #333333; /* Match desired text color */
+  color: #333333;
 }
 
 .portfolio-text p {
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 30px;
-  color: #333333; /* Match desired text color */
+  color: #333333;
 }
 
-/* Button styling */
 .portfolio-text .btn {
   display: inline-block;
   padding: 12px 24px;
-  border: 3px solid #333333; /* Dark border */
-  background-color: #E6E6E6; /* Light gray background */
-  color: #333333; /* Dark text */
+  border: 3px solid #333333;
+  background-color: #E6E6E6;
+  color: #333333;
   font-weight: bold;
   font-size: 16px;
   text-decoration: none;
@@ -262,50 +285,46 @@ body.services-page .overlay .logo-overlay p {
 }
 
 .portfolio-text .btn:hover {
-  background-color: #333333; /* Dark background on hover */
-  color: #E6E6E6; /* Light gray text on hover */
+  background-color: #333333;
+  color: #E6E6E6;
   border-color: #333333;
 }
 
-/* Navigation arrows */
 .portfolio-prev,
 .portfolio-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background-color: transparent;
-  color: #333; /* Default color */
+  color: #333;
   border: none;
-  font-size: 72px; /* Doubled size */
+  font-size: 72px;
   padding: 0;
   cursor: pointer;
-  z-index: 2; /* Above image and text */
+  z-index: 2;
   transition: color 0.3s ease;
 }
 
 .portfolio-prev:hover,
-.portfolio-prev:active,
-.portfolio-next:hover,
-.portfolio-next:active {
-  color: #D22F2B; /* Red on hover and click */
+.portfolio-next:hover {
+  color: #D22F2B;
 }
 
 .portfolio-prev {
-  left: 40px; /* Moved further out */
+  left: 40px;
 }
 
 .portfolio-next {
-  right: 40px; /* Moved further out */
+  right: 40px;
 }
 
-/* Dot indicators */
 .portfolio-dots {
   text-align: center;
   margin-top: 30px;
 }
 
 .portfolio-dots button {
-  background-color: #666; /* Darker gray for dots */
+  background-color: #666;
   border: none;
   border-radius: 50%;
   width: 12px;
@@ -316,7 +335,7 @@ body.services-page .overlay .logo-overlay p {
 }
 
 .portfolio-dots button.active {
-  background-color: #333; /* Dark active dot */
+  background-color: #333;
 }
 
 /* -------------------- Responsive -------------------- */
@@ -324,13 +343,13 @@ body.services-page .overlay .logo-overlay p {
   .portfolio-content {
     flex-direction: column;
     text-align: center;
-    padding: 0 20px; /* Reset padding on mobile */
+    padding: 0 20px;
   }
 
   .portfolio-text {
     text-align: center;
-    padding: 20px 15px; /* Further reduced padding */
-    margin-left: 0; /* Remove overlap on mobile */
+    padding: 20px 15px;
+    margin-left: 0;
   }
 
   .portfolio-prev,
@@ -338,13 +357,13 @@ body.services-page .overlay .logo-overlay p {
     top: auto;
     bottom: 20px;
     transform: translateY(0);
-    color: #333; /* Ensure visibility */
-    font-size: 48px; /* Reduced size on mobile */
+    color: #333;
+    font-size: 48px;
     left: 50%;
     right: 50%;
   }
 
   .portfolio-image {
-    margin-bottom: 20px; /* Space between image and text */
+    margin-bottom: 20px;
   }
 }
