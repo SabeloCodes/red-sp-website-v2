@@ -22,9 +22,8 @@ function injectCSS(href) {
   document.head.appendChild(link);
 }
 
-// On DOM load
 document.addEventListener("DOMContentLoaded", () => {
-  injectContent("components/nav.html", "navigation");
+  injectContent("components/nav.html", "navigation", setupDropdownSlideLinks);
   injectContent("components/footer.html", "page-footer");
 
   // Inject carousel and setup
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
-        entry.target.style.animationDelay = `${index * 150}ms`; // 150ms stagger
+        entry.target.style.animationDelay = `${index * 150}ms`;
         entry.target.classList.add("fade-in-up");
         observer.unobserve(entry.target);
       }
@@ -63,14 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function showSlide(index) {
       slides.forEach((slide, i) => {
         slide.classList.remove('active');
+        slide.style.display = i === index ? 'block' : 'none';
         if (i === index) slide.classList.add('active');
       });
 
       if (dotsContainer) {
         const dots = dotsContainer.querySelectorAll('button');
         dots.forEach((dot, i) => {
-          dot.classList.remove('active');
-          if (i === index) dot.classList.add('active');
+          dot.classList.toggle('active', i === index);
         });
       }
     }
@@ -78,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function createDots() {
       slides.forEach((_, i) => {
         const dot = document.createElement('button');
-        if (i === currentIndex) dot.classList.add('active');
+        dot.classList.toggle('active', i === currentIndex);
         dot.addEventListener('click', () => {
           currentIndex = i;
           showSlide(currentIndex);
@@ -100,5 +99,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     showSlide(currentIndex);
+
+    // -------------------- Handle Anchor Click + Slide Index --------------------
+    function setupDropdownSlideLinks() {
+      const navLinks = document.querySelectorAll('a[href*="#portfolio-section"][data-slide-index]');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const index = parseInt(link.getAttribute('data-slide-index'), 10);
+          const target = document.querySelector('#portfolio-section');
+
+          if (target) {
+            // Smooth scroll to portfolio section
+            target.scrollIntoView({ behavior: 'smooth' });
+
+            // Delay to allow scroll, then update slide
+            setTimeout(() => {
+              currentIndex = index;
+              showSlide(currentIndex);
+            }, 600); // Adjust if scroll duration changes
+          }
+        });
+      });
+    }
   }
 });
