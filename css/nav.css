@@ -8,7 +8,7 @@
   position: absolute;
   top: -15px;
   left: 0;
-  right: 0; /* ✅ Ensures no content spills past */
+  right: 0;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -20,8 +20,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 20px;     /* ✅ Adds spacing from right edge */
-  margin-left: auto;       /* ✅ Pushes to the far right cleanly */
+  padding-right: 20px;
+  margin-left: auto;
   overflow: visible;
   flex-shrink: 0;
 }
@@ -45,7 +45,7 @@
 }
 
 .logo img {
-  height: 80px;
+  height: 150px;
   width: auto;
   object-fit: cover;
 }
@@ -70,13 +70,29 @@ nav.main-nav ul {
 nav.main-nav ul li a {
   text-decoration: none;
   color: #fff;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   transition: color 0.3s ease, opacity 0.3s ease;
   position: relative;
   opacity: 0.6;
   display: block;
   padding: 10px;
+}
+
+/* Remove default focus outline for nav links */
+nav.main-nav ul li a:focus {
+  outline: none;
+}
+
+/* Apply focus-visible for keyboard users only (same as hover) */
+nav.main-nav ul li a:focus-visible {
+  color: #d22f2b;
+  opacity: 1;
+}
+
+/* Show underline on focus-visible too */
+nav.main-nav ul li a:focus-visible::after {
+  width: 100%;
 }
 
 nav.main-nav ul li a:hover {
@@ -110,90 +126,54 @@ nav.main-nav ul li a.active::after {
   display: none;
 }
 
-/* Dropdown */
+/* Dropdown container */
 nav.main-nav ul li.dropdown {
   position: relative;
-  display: inline-block;
-  transition: transform 0.3s ease;
 }
 
-nav.main-nav ul li.dropdown:hover {
-  transform: translateY(-5px);
-}
-
-nav.main-nav ul li.dropdown .dropdown-toggle {
-  position: relative;
-  padding-bottom: 4px;
-}
-
-nav.main-nav ul li.dropdown .dropdown-toggle::after {
-  content: "\25BC";
-  position: absolute;
-  left: 50%;
-  bottom: -6px;
-  transform: translateX(-50%);
-  font-size: 0.8em;
-  color: #fff;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-nav.main-nav ul li.dropdown:hover .dropdown-toggle::after {
-  opacity: 0;
-}
-
+/* Hide dropdown by default */
 nav.main-nav ul li.dropdown .dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: transparent;
   list-style: none;
-  padding: 10px;
   margin: 0;
-  width: auto;
+  padding: 10px 0;
   z-index: 30;
+  background-color: transparent;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
+/* Show dropdown on hover, display items horizontally */
 nav.main-nav ul li.dropdown:hover .dropdown-menu {
-  display: block;
+  display: flex !important;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Dropdown menu list items */
 nav.main-nav ul li.dropdown .dropdown-menu li {
-  text-align: center;
+  display: block;
 }
 
+/* Dropdown menu links */
 nav.main-nav ul li.dropdown .dropdown-menu li a {
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: normal;
   color: #fff;
-  font-size: 14px;
-  padding: 10px;
-  display: block;
-  text-decoration: none;
-  position: relative;
-  opacity: 0.6;
-  transition: color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 nav.main-nav ul li.dropdown .dropdown-menu li a:hover {
-  color: #d22f2b;
   opacity: 1;
-}
-
-nav.main-nav ul li.dropdown .dropdown-menu li a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background-color: #d22f2b;
-  transition: width 0.3s ease;
-}
-
-nav.main-nav ul li.dropdown .dropdown-menu li a:hover::after {
-  width: 100%;
+  color: #d22f2b;
 }
 
 /* Social Icons */
@@ -214,9 +194,11 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover::after {
   background-repeat: no-repeat;
   background-position: center;
   transition: transform 0.3s ease;
+  outline: none; /* Remove default outline */
 }
 
-.social-icons a:hover {
+.social-icons a:hover,
+.social-icons a:focus-visible {
   transform: translateY(-5px);
 }
 
@@ -265,7 +247,7 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover::after {
   }
 
   .logo img {
-    height: 70px;
+    height: 77px;
   }
 
   .hamburger {
@@ -315,10 +297,13 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover::after {
     transform: none;
     padding: 10px;
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   nav.main-nav ul li.dropdown.active .dropdown-menu {
-    display: block;
+    display: flex;
   }
 
   nav.main-nav ul li.dropdown .dropdown-toggle::after {
@@ -331,13 +316,13 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover::after {
     margin-top: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    min-width: 150px; /* Ensure space for all icons */
+    min-width: 150px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .logo img {
-    height: 60px;
+    height: 66px;
   }
 }
 
@@ -363,4 +348,3 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover::after {
 .hamburger.open span:nth-child(3) {
   transform: translateY(-9px) rotate(-45deg);
 }
-
