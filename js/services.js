@@ -1,35 +1,13 @@
-// Utility to inject external HTML
-function injectContent(url, targetId, callback) {
-  fetch(url)
-    .then((res) => res.text())
-    .then((html) => {
-      const target = document.getElementById(targetId);
-      if (target) {
-        target.innerHTML = html;
-        if (typeof callback === "function") callback();
-      } else {
-        console.error(`Element with ID "${targetId}" not found.`);
-      }
-    })
-    .catch((err) => console.error(`Error loading ${url}:`, err));
-}
-
-// Utility to inject external CSS
-function injectCSS(href) {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = href;
-  document.head.appendChild(link);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  injectContent("components/nav.html", "navigation", setupDropdownSlideLinks);
+  // Inject navigation and footer
+  injectContent("components/nav.html", "navigation", () => {
+    setupDropdownSlideLinks();
+    setupCarouselOverlay();
+  });
   injectContent("components/footer.html", "page-footer");
 
-  // Inject carousel and setup
   injectCSS("css/carousel.css");
   injectContent("components/carousel.html", "carousel-placeholder", () => {
-    setupCarouselOverlay();
     setupCarouselLoop();
   });
 
@@ -100,23 +78,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showSlide(currentIndex);
 
-    // -------------------- Handle Anchor Click + Slide Index --------------------
+    // -------------------- Submenu click links to specific slide --------------------
     function setupDropdownSlideLinks() {
-      const navLinks = document.querySelectorAll('a[href*="#portfolio-section"][data-slide-index]');
-      navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          const index = parseInt(link.getAttribute('data-slide-index'), 10);
-          const target = document.querySelector('#portfolio-section');
-
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => {
-              currentIndex = index;
-              showSlide(currentIndex);
-            }, 600);
-          }
+      console.log('Setting up dropdown slide links'); // Debug log
+      const navLinks = document.querySelectorAll('.dropdown-menu a');
+      if (navLinks.length) {
+        console.log('Found dropdown links:', navLinks); // Debug log
+        navLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            console.log('Click detected on:', link.textContent); // Debug log
+            e.preventDefault(); // Prevent default navigation
+            const targetSlideId = link.getAttribute('href').split('#')[1]; // Get slide ID
+            const targetSlide = document.getElementById(targetSlideId);
+            if (targetSlide && window.location.pathname.includes('services.html')) {
+              const portfolioSection = document.querySelector('#portfolio-section');
+              if (portfolioSection) {
+                portfolioSection.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                  currentIndex = Array.from(slides).indexOf(targetSlide);
+                  if (currentIndex !== -1) {
+                    showSlide(currentIndex);
+                    history.pushState(null, null, link.getAttribute('href')); // Update URL
+                    console.log('Slide activated:', targetSlideId); // Debug log
+                  } else {
+                    console.log('Slide not found:', targetSlideId); // Debug log
+                  }
+                }, 600);
+              }
+            } else {
+              window.location.href = link.getAttribute('href'); // Fallback for non-services pages
+            }
+          });
         });
-      });
+      } else {
+        console.log('No dropdown links found'); // Debug log
+      }
+    }
+
+    // On page load: check URL hash for slide ID
+    const hash = window.location.hash;
+    if (hash && window.location.pathname.includes('services.html')) {
+      const targetSlideId = hash.substring(1);
+      const targetSlide = document.getElementById(targetSlideId);
+      if (targetSlide) {
+        const portfolioSection = document.querySelector('#portfolio-section');
+        if (portfolioSection) {
+          portfolioSection.scrollIntoView({ behavior: 'smooth' });
+          currentIndex = Array.from(slides).indexOf(targetSlide);
+          showSlide(currentIndex);
+          console.log('Loaded slide from hash:', targetSlideId); // Debug log
+        }
+      }
     }
 
     // -------------------- Touch Drag Support --------------------
@@ -148,5 +160,36 @@ document.addEventListener("DOMContentLoaded", () => {
         showSlide(currentIndex);
       }
     }
+  }
+
+  // Utility functions
+  function injectContent(url, targetId, callback) {
+    fetch(url)
+      .then((res) => res.text())
+      .then((html) => {
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.innerHTML = html;
+          if (typeof callback === "function") callback();
+        } else {
+          console.error(`Element with ID "${targetId}" not found.`);
+        }
+      })
+      .catch((err) => console.error(`Error loading ${url}:`, err));
+  }
+
+  function injectCSS(href) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  }
+
+  function setupCarouselOverlay() {
+    // Placeholder for overlay setup if needed
+  }
+
+  function setupCarouselLoop() {
+    // Placeholder for loop setup if needed
   }
 });
