@@ -1,44 +1,15 @@
-/* -------------------- General Layout Reset -------------------- */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
+/* Services Page Specific Styles */
 
-.section {
-  padding: 80px 20px;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-  text-align: center;
-}
-
-/* -------------------- Utility Spacing Classes -------------------- */
-.spacing-top-md {
-  margin-top: 24px !important;
-}
-
-.spacing-bottom-md {
-  margin-bottom: 24px !important;
-}
-
-/* -------------------- The Process Section Fixes -------------------- */
 .process-step .text-block {
   display: block;
 }
 
 .process-step .text-block h3,
 .process-step .text-block p {
-  margin: 0; /* Reset inherited or browser default spacing */
+  margin: 0;
 }
 
-/* -------------------- Services Page Specific Overlay Styling -------------------- */
+/* Services Page Overlay Styling */
 body.services-page .overlay .logo-overlay h1 {
   color: #ffffff !important;
 }
@@ -59,7 +30,7 @@ body.services-page .overlay .logo-overlay p {
   border-color: #000;
 }
 
-/* -------------------- Why Red SP Section -------------------- */
+/* Why Red SP Section */
 #why-red-sp {
   background-color: #e6e6e6;
   padding: 80px 20px;
@@ -90,7 +61,7 @@ body.services-page .overlay .logo-overlay p {
   margin-bottom: 0;
 }
 
-/* -------------------- Full Width Image Section -------------------- */
+/* Full Width Image Section */
 .full-width-image {
   width: 100%;
   overflow: hidden;
@@ -109,7 +80,7 @@ body.services-page .overlay .logo-overlay p {
   border: none;
 }
 
-/* -------------------- The Process Section -------------------- */
+/* The Process Section */
 .the-process-section {
   background-color: #2f2f2f;
   color: #e6e6e6;
@@ -133,7 +104,7 @@ body.services-page .overlay .logo-overlay p {
 
 .process-step {
   display: flex;
-  align-items: center; /* Reverted to center for vertical alignment */
+  align-items: center;
   text-align: left;
   max-width: 700px;
   width: 100%;
@@ -147,19 +118,10 @@ body.services-page .overlay .logo-overlay p {
 }
 
 .process-step h3 {
-  margin-bottom: 24px !important; /* Direct spacing rule */
-}
-
-.process-step p {
-  margin-top: 24px !important; /* Direct spacing rule */
-}
-
-/* Keep utility classes for consistency */
-.process-step .spacing-bottom-md {
   margin-bottom: 24px !important;
 }
 
-.process-step .spacing-top-md {
+.process-step p {
   margin-top: 24px !important;
 }
 
@@ -192,21 +154,26 @@ body.services-page .overlay .logo-overlay p {
   }
 }
 
-/* -------------------- Portfolio Section (Case Studies) -------------------- */
+/* Portfolio Section (Case Studies) */
 .portfolio-section {
   background-color: #fff;
   padding: 80px 0;
   color: #333;
 }
 
-.portfolio-section .heading-xl {
-  text-align: center;
-  margin-bottom: 60px;
-  color: #333;
+/* Padding for main carousel placeholder on services page to make space for nav */
+body.services-page #carousel-placeholder {
+    position: relative; /* Needed for absolute positioning context if nav is child of this */
+    padding-top: 0; 
+}
+@media (max-width: 768px) {
+  body.services-page #carousel-placeholder {
+      padding-top: 80px; /* Adjust for mobile nav height if different */
+  }
 }
 
 .portfolio-carousel {
-  position: relative;
+  position: relative; /* Ensure this is relative for portfolio slides/arrows */
 }
 
 .portfolio-slide {
@@ -225,14 +192,14 @@ body.services-page .overlay .logo-overlay p {
   align-items: center;
   justify-content: center;
   gap: 40px;
-  max-width: 1400px; /* widened from 1200px */
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 60px;
   box-sizing: border-box;
 }
 
 .portfolio-image {
-  flex: 1 1 60%;  /* enlarged from 55% */
+  flex: 1 1 60%;
   min-width: 400px;
   max-width: 700px;
   position: relative;
@@ -248,13 +215,13 @@ body.services-page .overlay .logo-overlay p {
 }
 
 .portfolio-text {
-  flex: 1 1 45%;  /* increased from 40% */
+  flex: 1 1 45%;
   background-color: #E6E6E6;
   padding: 40px 30px;
   box-sizing: border-box;
   text-align: center;
   color: #333333;
-  margin-left: -100px;  /* shifted more over image */
+  margin-left: -100px;
   z-index: 1;
 }
 
@@ -339,7 +306,7 @@ body.services-page .overlay .logo-overlay p {
   background-color: #333;
 }
 
-/* -------------------- Responsive -------------------- */
+/* Responsive */
 @media (max-width: 768px) {
   .portfolio-content {
     flex-direction: column;
@@ -362,7 +329,7 @@ body.services-page .overlay .logo-overlay p {
     top: auto;
     bottom: 15px;
     transform: translateY(0);
-    font-size: 48px; /* smaller arrows for mobile */
+    font-size: 48px;
     left: 20px;
     right: 20px;
   }
@@ -383,8 +350,6 @@ body.services-page .overlay .logo-overlay p {
     font-size: 16px;
   }
 }
-
-/* ----------------------- Styles for Smaller Screens (≤ 480px) -------------------- */
 
 @media (max-width: 480px) {
   .portfolio-content {

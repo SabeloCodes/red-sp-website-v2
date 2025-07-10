@@ -1,9 +1,10 @@
 /* -------------------- Base -------------------- */
-body, html {
+html, body {
   margin: 0;
-  padding: 0;
+  background: #000;
+  padding: 0; /* IMPORTANT: Ensure padding-top is 0 or completely removed here */
   font-family: 'Poppins', sans-serif;
-  color: #fff;
+  color: #fff; /* Default text color for body, adjust as needed for specific sections */
   overflow-x: hidden;
 }
 
@@ -11,6 +12,19 @@ body, html {
 :focus {
   outline: 2px solid #c0392b;
   outline-offset: 4px;
+}
+
+
+/* -------------------- Navigation Styles (Consolidated from your nav.css) -------------------- */
+
+#navigation { /* This targets the <header id="navigation"> after injection */
+  position: absolute; /* Changed from fixed to absolute */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent; /* Ensure it's transparent */
+  /* No transitions for background/opacity as it won't change state */
 }
 
 /* -------------------- Who We Are Section -------------------- */
@@ -93,6 +107,7 @@ body, html {
 /* -------------------- Portfolio Section -------------------- */
 .portfolio-carousel {
   position: relative;
+  padding-top: 100px; /* Adjust this value to match your nav's height */
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -289,54 +304,488 @@ body, html {
   box-shadow: none;
 }
 
-/* -------------------- Responsive -------------------- */
-@media (max-width: 768px) {
-  #what-we-do .services-list {
-    gap: 20px;
+
+/* -------------------- Utility/UI Elements -------------------- */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: rgba(210, 47, 43, 0.7);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#back-to-top:hover {
+  background-color: #d22f2b;
+  transform: translateY(-2px);
+}
+
+#back-to-top:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* -------------------- Navigation Styles (Consolidated from nav.css) -------------------- */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px; /* Adjust padding as needed for overall nav height */
+  color: #fff; /* Text color for nav items */
+  z-index: 30; /* Internal layering within the nav */
+  box-sizing: border-box;
+  background-color: transparent !important;
+  position: absolute; /* Ensure it overlays content correctly if needed */
+  top: 0;
+  left: 0;
+  width: 100%;  
+}
+
+/* Hide the hamburger on desktop by default */
+.hamburger {
+  display: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  margin-left: auto;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo img {
+  height: 150px;
+  width: auto;
+  object-fit: cover;
+}
+
+.logo a,
+.logo a img {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+nav.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+nav.main-nav ul li a {
+  text-decoration: none;
+  color: #fff; /* Ensure nav links are white */
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  opacity: 0.6;
+  display: block;
+  padding: 10px;
+}
+
+/* Remove default focus outline for nav links */
+nav.main-nav ul li a:focus {
+  outline: none;
+  border: none;
+}
+
+/* Apply focus-visible for keyboard users only (same as hover) */
+nav.main-nav ul li a:focus-visible {
+  color: #d22f2b;
+  opacity: 1;
+}
+
+/* Show underline on focus-visible too */
+nav.main-nav ul li a:focus-visible::after {
+  width: 100%;
+}
+
+nav.main-nav ul li a:hover {
+  color: #d22f2b;
+  opacity: 1;
+}
+
+nav.main-nav ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #d22f2b;
+  transition: width 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav.main-nav ul li a:hover::after {
+  width: 100%;
+}
+
+nav.main-nav ul li a.active {
+  color: #d22f2b !important;
+  opacity: 1;
+  font-weight: bold;
+}
+
+nav.main-nav ul li a.active::after {
+  /* display: none; */
+}
+
+/* Dropdown container */
+nav.main-nav ul li.dropdown {
+  position: relative;
+}
+
+/* Hide dropdown by default */
+nav.main-nav ul li.dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  z-index: 30;
+  background-color: transparent;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/* Show dropdown on hover, display items horizontally */
+nav.main-nav ul li.dropdown:hover .dropdown-menu {
+  display: flex !important;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Dropdown menu list items */
+nav.main-nav ul li.dropdown .dropdown-menu li {
+  display: block;
+}
+
+/* Dropdown menu links */
+nav.main-nav ul li.dropdown .dropdown-menu li a {
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: normal;
+  color: #fff;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+nav.main-nav ul li.dropdown .dropdown-menu li a:hover,
+nav.main-nav ul li.dropdown .dropdown-menu li a:focus-visible {
+  opacity: 1;
+  color: #d22f2b;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  overflow: visible;
+}
+
+.social-icons a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease;
+  outline: none; /* Remove default outline */
+}
+
+/* Social icons hover and focus-visible share same effect */
+.social-icons a:hover,
+.social-icons a:focus-visible {
+  transform: translateY(-5px);
+}
+
+.social-icons a.linkedin {
+  background-image: url('../img/ICONS/social_media_icons/Linkedin-w.png');
+}
+
+.social-icons a.linkedin:hover {
+  background-image: url('../img/ICONS/social_media_icons/LinkedIn-r.png');
+}
+
+.social-icons a.facebook {
+  background-image: url('../img/ICONS/social_media_icons/Facebook-w.png');
+}
+
+.social-icons a.facebook:hover {
+  background-image: url('../img/ICONS/social_media_icons/communication.png');
+}
+
+.social-icons a.instagram {
+  background-image: url('../img/ICONS/social_media_icons/Instagram-w.png');
+}
+
+.social-icons a.instagram:hover {
+  background-image: url('../img/ICONS/social_media_icons/instagram-r.png');
+}
+
+
+/* -------------------- Back to Top Button Styles (Keep this as is) -------------------- */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: rgba(210, 47, 43, 0.7);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#back-to-top:hover {
+  background-color: #d22f2b;
+  transform: translateY(-2px);
+}
+
+#back-to-top:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
+
+/* ------------------ Responsive (Mobile-Specific Overrides) --------------------- */
+@media screen and (max-width: 768px) {
+
+  html, body {
+    /* padding-top: 80px; Adjust based on actual mobile nav height */
   }
 
-  #what-we-do .service-item h3 {
-    font-size: 1rem;
-  }
-
-  #what-we-do .service-item img {
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-
-  .portfolio-content {
-    flex-direction: column;
+  .nav-container {
+    flex-direction: row;
+    padding: 10px 20px;
+    top: 0; /* Align to the very top */
+    justify-content: space-between;
+    flex-wrap: nowrap;
     align-items: center;
   }
 
-  .portfolio-text {
-    position: static;
-    transform: none;
+  /* Hamburger Centered and Responsive: Make it flex on mobile */
+  .hamburger {
+    display: flex; /* Override display: none from desktop styles */
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 28px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 30;
+    margin: 0; /* Remove auto margin that might affect positioning */
+    position: relative; /* Ensure it's positioned within the flow */
+  }
+
+  /* Removes red border outline on focus/click */
+  .hamburger:focus,
+  .hamburger:active,
+  .hamburger:focus-visible {
+    outline: none;
+    border: none;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-left {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: auto;
+  }
+
+  .nav-right {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: auto;
+    padding-right: 0;
+    margin-top: 0;
+  }
+
+  .nav-center {
+    display: none; /* Hide the desktop main menu wrapper on mobile */
+  }
+
+  /* Mobile Main Navigation Menu when opened by Hamburger */
+  .main-nav {
+    display: none;
     width: 100%;
-    margin-top: 20px;
-    box-shadow: none;
+    position: absolute;
+    top: 97px; /* Position directly below the header */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px 0;
+    box-sizing: border-box;
+    height: calc(100vh - 97px); /* Adjust height based on dynamic top */
+    overflow-y: auto;
   }
 
-  .portfolio-prev,
-  .portfolio-next {
-    position: static;
-    font-size: 2.5rem;
-    margin: 10px;
+  .main-nav.show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slideDown 0.3s ease-in-out forwards;
   }
 
-  .portfolio-text .btn {
-    max-width: 90%;
+  .main-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
   }
 
-  .testimonials-carousel {
-    padding: 0 20px;
+  nav.main-nav ul li {
+    margin: 10px 0;
   }
 
-  .prev-testimonial,
-  .next-testimonial {
-    font-size: 2.4rem;
+  /* Mobile Dropdown Menu (SERVICES submenu) */
+  nav.main-nav ul li.dropdown .dropdown-menu {
     position: static;
     transform: none;
-    margin: 20px 10px 0;
+    padding: 10px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
   }
+
+  nav.main-nav ul li.dropdown.active .dropdown-menu {
+    display: flex;
+  }
+
+  nav.main-nav ul li.dropdown .dropdown-toggle::after {
+    content: "\25BC";
+    position: static;
+    margin-left: 5px;
+  }
+
+  .social-icons {
+    margin-top: 0;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    min-width: unset;
+  }
+
+  /* Hides overlay text when menu opens */
+  .carousel-text-overlay.hidden-on-mobile-nav-open {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  html, body {
+    /* padding-top: 86px; Adjust for smaller logo + padding */
+  }  
+
+  .logo img {
+    height: 66px;
+  }
+  .main-nav {
+    top: 86px; /* Adjust for smaller logo (10px padding + 66px logo + 10px padding) */
+    height: calc(100vh - 86px);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
 }

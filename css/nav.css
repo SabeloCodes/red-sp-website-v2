@@ -16,6 +16,11 @@
   box-sizing: border-box;
 }
 
+/* Add this rule to hide the hamburger on desktop by default */
+.hamburger {
+  display: none;
+}
+
 .nav-right {
   display: flex;
   align-items: center;
@@ -82,6 +87,7 @@ nav.main-nav ul li a {
 /* Remove default focus outline for nav links */
 nav.main-nav ul li a:focus {
   outline: none;
+  border: none;
 }
 
 /* Apply focus-visible for keyboard users only (same as hover) */
@@ -171,7 +177,8 @@ nav.main-nav ul li.dropdown .dropdown-menu li a {
   transition: opacity 0.3s ease, color 0.3s ease;
 }
 
-nav.main-nav ul li.dropdown .dropdown-menu li a:hover {
+nav.main-nav ul li.dropdown .dropdown-menu li a:hover,
+nav.main-nav ul li.dropdown .dropdown-menu li a:focus-visible {
   opacity: 1;
   color: #d22f2b;
 }
@@ -197,6 +204,7 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover {
   outline: none; /* Remove default outline */
 }
 
+/* Social icons hover and focus-visible share same effect */
 .social-icons a:hover,
 .social-icons a:focus-visible {
   transform: translateY(-5px);
@@ -226,40 +234,39 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover {
   background-image: url('../img/ICONS/social_media_icons/instagram-r.png');
 }
 
-/* Responsive */
+
+/* ------------------ Responsive --------------------- */
 @media screen and (max-width: 768px) {
   .nav-container {
     flex-direction: row;
-    padding: 10px;
+    padding: 10px 20px;
     top: 0;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 
-  .nav-right {
-    justify-content: center;
-    padding-right: 0;
-    margin-top: 10px;
-  }
-  
-  .social-icons {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .logo img {
-    height: 77px;
-  }
-
+  /* ✅ Hamburger Centered and Responsive: Make it flex on mobile */
   .hamburger {
-    display: flex;
+    display: flex; /* Override display: none from desktop styles */
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     width: 28px;
     height: 22px;
     background: none;
     border: none;
     cursor: pointer;
     z-index: 30;
+    margin: 0 auto; /* Correctly centers it between nav-left and nav-right */
+  }
+
+  /* ✅ Removes red border outline on focus/click */
+  .hamburger:focus,
+  .hamburger:active,
+  .hamburger:focus-visible {
+    outline: none;
+    border: none;
   }
 
   .hamburger span {
@@ -270,28 +277,57 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover {
     transition: all 0.3s ease;
   }
 
+  .nav-left {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: auto;
+  }
+
+  .nav-right {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: auto;
+    padding-right: 0;
+    margin-top: 0;
+  }
+
+  .nav-center {
+    display: none; /* Hide the desktop main menu wrapper on mobile */
+  }
+
+  /* Mobile Main Navigation Menu when opened by Hamburger */
   .main-nav {
     display: none;
     width: 100%;
-    background-color: transparent;
+    position: absolute;
+    /* Calculated height: nav-container top/bottom padding (10px each) + logo height (77px for >480px) = 97px */
+    top: 97px; /* Position directly below the header */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
     padding: 20px 0;
+    box-sizing: border-box;
+    height: calc(100vh - 97px);
+    overflow-y: auto;
   }
 
   .main-nav.show {
     display: flex;
     flex-direction: column;
+    align-items: center;
     animation: slideDown 0.3s ease-in-out forwards;
   }
 
   .main-nav ul {
     flex-direction: column;
     align-items: center;
+    gap: 0;
   }
 
   nav.main-nav ul li {
     margin: 10px 0;
   }
 
+  /* Mobile Dropdown Menu (SERVICES submenu) */
   nav.main-nav ul li.dropdown .dropdown-menu {
     position: static;
     transform: none;
@@ -300,6 +336,7 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: center;
   }
 
   nav.main-nav ul li.dropdown.active .dropdown-menu {
@@ -313,16 +350,27 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:hover {
   }
 
   .social-icons {
-    margin-top: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    min-width: 150px;
+    margin-top: 0;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    min-width: unset;
+  }
+
+  /* ✅ Hides overlay text when menu opens */
+  .carousel-text-overlay.hidden-on-mobile-nav-open {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 }
 
 @media screen and (max-width: 480px) {
   .logo img {
     height: 66px;
+  }
+  .main-nav {
+    top: 86px; /* Adjust for smaller logo (10px padding + 66px logo + 10px padding) */
+    height: calc(100vh - 86px);
   }
 }
 

@@ -5,21 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Services | RED SP</title>
 
-  <!-- Poppins Font Import -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/typography.css">
   <link rel="stylesheet" href="css/buttons.css">
-  <link rel="stylesheet" href="css/carousel.css">
+  <link rel="stylesheet" href="css/style.css?v=3"> <link rel="stylesheet" href="css/carousel.css">
   <link rel="stylesheet" href="css/services.css">
-  <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/footer.css?v=2">
 
-  <!-- Scripts -->
-  <script src="js/overlay.js"></script>
+  <script src="js/overlay.js" defer></script>
   <script src="js/carousel.js" defer></script>
-  <script src="js/services.js" defer></script>
+  <script src="js/script.js?v=3" defer></script> 
 </head>
 
 <body class="services-page carousel-page index-page"
@@ -30,13 +26,10 @@
   data-carousel-button2="Explore the process"
   data-carousel-button2-link="#the-process"
 >
-  <!-- Navigation -->
   <header id="navigation"></header>
 
-  <!-- Carousel Placeholder (Dynamically Injected) -->
   <div id="carousel-placeholder"></div>
 
-  <!-- WHY RED SP -->
   <section id="why-red-sp" class="why-red-section">
     <div class="container">
       <h2 class="heading-xl text-red">Why Red SP</h2>
@@ -63,12 +56,10 @@
     </div>
   </section>
 
-  <!-- FULL WIDTH IMAGE -->
   <div class="full-width-image">
     <img src="img/PROJECTS/US_HEDGE_FUND/cropped_office_screen.jpg" alt="Workspace Image">
   </div>
 
-  <!-- THE PROCESS -->
   <section id="the-process" class="the-process-section">
     <div class="container">
       <h2 class="heading-xl text-light-grey">The Process</h2>
@@ -121,13 +112,12 @@
     </div>
   </section>
 
-   <!-- PORTFOLIO SECTION -->
-<section id="portfolio-section" class="portfolio-section section">
+  <!---------------- PORTFOLIO SECTION ----------------->
+   <section id="portfolio-section" class="portfolio-section section">
   <div class="container">
     <h2 class="heading-xl text-dark">Services</h2>
 
     <div class="portfolio-carousel">
-      <!-- Slide 1 -->
       <div class="portfolio-slide active" id="workspace-slide">
         <div class="portfolio-content">
           <div class="portfolio-image">
@@ -141,7 +131,6 @@
         </div>
       </div>
 
-      <!-- Slide 2 -->
       <div class="portfolio-slide" id="education-slide">
         <div class="portfolio-content">
           <div class="portfolio-image">
@@ -155,7 +144,6 @@
         </div>
       </div>
 
-      <!-- Slide 3 -->
       <div class="portfolio-slide" id="retail-slide">
         <div class="portfolio-content">
           <div class="portfolio-image">
@@ -169,7 +157,6 @@
         </div>
       </div>
 
-      <!-- Slide 4 -->
       <div class="portfolio-slide" id="residential-slide">
         <div class="portfolio-content">
           <div class="portfolio-image">
@@ -183,7 +170,6 @@
         </div>
       </div>
 
-      <!-- Arrows and Dots -->
       <button class="portfolio-prev" aria-label="Previous Slide">❮</button>
       <button class="portfolio-next" aria-label="Next Slide">❯</button>
       <div class="portfolio-dots"></div>
@@ -191,7 +177,6 @@
   </div>
 </section>
 
-  <!-- Footer -->
   <footer id="page-footer"></footer>
 </body>
 </html>
