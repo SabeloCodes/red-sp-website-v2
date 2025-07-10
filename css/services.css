@@ -312,9 +312,35 @@ body.services-page #carousel-placeholder {
   background-color: #333;
 }
 
-/* ------------ Responsive --------------- */
+/* --------------------- Responsive ---------------------- */
 
 @media (max-width: 768px) {
+
+  .process-step {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .process-step img {
+    width: 75px; /* halve from ~150px to ~75px */
+    margin-right: 0; /* remove right margin when stacking vertically */
+    margin-bottom: 10px; /* slight spacing below icon */
+  }
+
+  .process-step .text-block {
+    text-align: center;
+  }
+
+  .process-step .text-block h3 {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .process-step .text-block p {
+    margin-top: 0;
+  }
+
   .portfolio-content {
     flex-direction: column;
     padding: 0 20px;
