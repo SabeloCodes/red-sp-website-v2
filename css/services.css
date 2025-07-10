@@ -157,8 +157,13 @@ body.services-page .overlay .logo-overlay p {
 /* Portfolio Section (Case Studies) */
 .portfolio-section {
   background-color: #fff;
-  padding: 80px 0;
+  padding-top: 10px; /* reduced from 80px */
+  padding-bottom: 10px; /* or keep at 80px if you only want top reduced */
   color: #333;
+}
+
+.portfolio-section h2 {
+  margin-bottom: 5px; /* or smaller value as needed */
 }
 
 /* Padding for main carousel placeholder on services page to make space for nav */
@@ -174,6 +179,8 @@ body.services-page #carousel-placeholder {
 
 .portfolio-carousel {
   position: relative; /* Ensure this is relative for portfolio slides/arrows */
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .portfolio-slide {
@@ -194,15 +201,17 @@ body.services-page #carousel-placeholder {
   gap: 40px;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 60px;
+  padding-left: -20px; /* reduced from 60px */
+  padding-right: 60px; /* keep right padding as is */
   box-sizing: border-box;
 }
 
 .portfolio-image {
-  flex: 1 1 60%;
+  flex: 1 1 80%;
   min-width: 400px;
-  max-width: 700px;
+  max-width: 900px;
   position: relative;
+  margin-left: -20px; /* shift image closer to left */
   z-index: 0;
 }
 
@@ -221,7 +230,8 @@ body.services-page #carousel-placeholder {
   box-sizing: border-box;
   text-align: center;
   color: #333333;
-  margin-left: -100px;
+  margin-left: -120px; /* increase negative margin to shift it left */
+  margin-right: 20px;  /* add right margin to create space from right arrow */
   z-index: 1;
 }
 
@@ -283,7 +293,7 @@ body.services-page #carousel-placeholder {
 }
 
 .portfolio-next {
-  right: 0px;
+  right: -20px;
 }
 
 .portfolio-dots {
