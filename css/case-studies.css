@@ -79,7 +79,7 @@ html, body {
 }
 
 #revcap-section + .mini-carousel-overlay .carousel-item img {
-  border: 4px solid #333333 !important;
+  border: none; /* Removed border */
   box-sizing: border-box;
   display: block;
   width: 100%;
@@ -107,11 +107,10 @@ html, body {
 }
 
 #hedgefund-section .mini-carousel-overlay .carousel-item img {
-  border: 2px solid #E6E6E6;
+  border: none; /* Removed border */
   box-sizing: border-box;
   display: block;
 }
-
 
 /* -------------------- RICHARD MILLE Styles -------------------- */
 #richard-section .mini-carousel-overlay {
@@ -122,7 +121,7 @@ html, body {
 }
 
 #richard-section .mini-carousel-overlay .carousel-item img {
-  border: 2px solid #E6E6E6;
+  border: none; /* Removed border */
   box-sizing: border-box;
   display: block;
 }
@@ -175,7 +174,7 @@ html, body {
   }
 
   #revcap-section + .mini-carousel-overlay .carousel-item img {
-    border: 4px solid #333333 !important;
+    border: none; /* Removed border */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -188,7 +187,7 @@ html, body {
 
   /* US HEDGE FUND mobile image borders */
   #hedgefund-section .mini-carousel-overlay .carousel-item img {
-    border: 2px solid #E6E6E6;
+    border: none; /* Removed border */
   }
 
   #revcap-section .mini-carousel-overlay,

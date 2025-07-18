@@ -174,3 +174,12 @@
     filter: brightness(0) invert(1); /* turn white */
     transform: scale(1.1);
   }
+
+/* -------------------- Mobile Responsiveness -------------------- */
+
+@media (max-width: 768px) {
+  .btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}

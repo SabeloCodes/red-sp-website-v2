@@ -312,34 +312,67 @@ body.services-page #carousel-placeholder {
   background-color: #333;
 }
 
-/* --------------------- Responsive ---------------------- */
+/* --------------------- Mobile Responsive ---------------------- */
 
 @media (max-width: 768px) {
+
+  .process-steps-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px; /* reduce gap if spacing feels too wide */
+  }
 
   .process-step {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
+    width: 100%;
+    box
+
+  .process-step h3 {
+    font-size: 18px; /* ✅ reduce heading size for mobile */
+    word-break: break-word; /* ✅ ensure long words break */
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .process-step p {
+    font-size: 12px; /* ✅ reduce paragraph text size for mobile */
+    word-break: break-word; /* ✅ wrap long words to new line */
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .the-process-section .button-container .btn {
+    font-size: 14px;
+    padding: 10px 20px;
+    width: 80%;
+    max-width: 280px;
+    box-sizing: border-box;
   }
 
   .process-step img {
-    width: 75px; /* halve from ~150px to ~75px */
-    margin-right: 0; /* remove right margin when stacking vertically */
-    margin-bottom: 10px; /* slight spacing below icon */
+    display: block;
+    margin: 0 auto 10px auto; /* ensure icon is centered with margin below */
   }
 
   .process-step .text-block {
+    width: 100%;
     text-align: center;
+    padding: 0 10px; /* adds slight padding to prevent edge clipping */
+    box-sizing: border-box;
   }
 
-  .process-step .text-block h3 {
-    display: inline-block;
-    margin-bottom: 10px;
-  }
-
+  process-step .text-block h3,
   .process-step .text-block p {
-    margin-top: 0;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
   }
+}
 
   .portfolio-content {
     flex-direction: column;

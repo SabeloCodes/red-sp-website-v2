@@ -35,7 +35,7 @@
   overflow: hidden;
   height: 400px;
   background: linear-gradient(135deg, #ebebeb 0%, #dcdcdc 100%);
-  border: 1px solid #ddd;
+  border: none; /* Removed default border */
   border-radius: 0;
   order: 0; /* Reset order so JS can override */
 }
@@ -46,6 +46,7 @@
   height: 100%;
   object-fit: cover;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border: none; /* Removed border */
   border-radius: 0;
 }
 
@@ -99,7 +100,6 @@
 }
 
 /* -------------------- Dot Indicators -------------------- */
-
 .carousel-dots {
   position: absolute;
   bottom: 30px;

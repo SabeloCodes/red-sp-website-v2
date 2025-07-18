@@ -84,27 +84,37 @@ document.addEventListener("DOMContentLoaded", () => {
       const navLinks = document.querySelectorAll('.dropdown-menu a');
       if (navLinks.length) {
         console.log('Found dropdown links:', navLinks); // Debug log
+    
+        // ✅ Define navHeight here
+        const navHeight = window.innerWidth <= 768 ? 86 : 190;
+    
         navLinks.forEach(link => {
           link.addEventListener('click', (e) => {
-            console.log('Click detected on:', link.textContent); // Debug log
             e.preventDefault(); // Prevent default navigation
-            const targetSlideId = link.getAttribute('href').split('#')[1]; // Get slide ID
+            const targetSlideId = link.getAttribute('href').split('#')[1]; // Extract slide ID
             const targetSlide = document.getElementById(targetSlideId);
-            if (targetSlide && window.location.pathname.includes('services.html')) {
-              const portfolioSection = document.querySelector('#portfolio-section');
-              if (portfolioSection) {
-                portfolioSection.scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => {
-                  currentIndex = Array.from(slides).indexOf(targetSlide);
-                  if (currentIndex !== -1) {
-                    showSlide(currentIndex);
-                    history.pushState(null, null, link.getAttribute('href')); // Update URL
-                    console.log('Slide activated:', targetSlideId); // Debug log
-                  } else {
-                    console.log('Slide not found:', targetSlideId); // Debug log
-                  }
-                }, 600);
-              }
+            const portfolioSection = document.querySelector('#portfolio-section');
+    
+            if (portfolioSection && window.location.pathname.includes('services.html')) {
+              // ✅ Calculate adjusted offset using navHeight
+              const offset = portfolioSection.getBoundingClientRect().top + window.scrollY - navHeight;
+    
+              window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+              });
+    
+              // Ensure slide switches after scrolling completes
+              setTimeout(() => {
+                currentIndex = Array.from(slides).indexOf(targetSlide);
+                if (currentIndex !== -1) {
+                  showSlide(currentIndex);
+                  history.pushState(null, null, link.getAttribute('href')); // Update URL
+                  console.log('Slide activated:', targetSlideId); // Debug log
+                } else {
+                  console.log('Slide not found:', targetSlideId); // Debug log
+                }
+              }, 600); // Adjust delay if needed for scroll duration
             } else {
               window.location.href = link.getAttribute('href'); // Fallback for non-services pages
             }
