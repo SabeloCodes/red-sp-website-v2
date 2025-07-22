@@ -30,17 +30,17 @@ html, body {
 .tab-header {
   cursor: pointer;
   display: flex;
-  justify-content: flex-start;  /* Align to the left */
-  gap: 8px;                     /* Reduce space between heading and arrow */
-  align-items: center;
+  justify-content: center;         /* Center horizontally */
+  align-items: center;             /* Center vertically */
+  gap: 16px;
   font-weight: bold;
-  margin: 0;
-  padding: 20px 0;
+  padding: 40px 0;                 /* Adjust as needed for vertical centering */
   background: #fff;
   color: #d22f2b;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   transition: background 0.3s, color 0.3s;
   border: none;
+  height: 120px;                   /* Fixed height ensures consistent vertical alignment */
 }
 
 .tab-header:hover {
