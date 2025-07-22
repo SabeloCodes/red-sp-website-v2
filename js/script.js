@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
       fetch(url)
           .then(res => {
               if (!res.ok) {
-                  // Corrected syntax for template literal
                   console.error(`HTTP error! status: ${res.status} for URL: ${url}`);
                   throw new Error(`Failed to load ${url}: ${res.status}`);
               }
@@ -127,7 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   }
               });
           });
-
       } else {
           console.warn("Hamburger or Main Nav elements not found after injection. Mobile menu functionality might be impaired.");
       }
@@ -403,7 +401,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }
 
-
   // --- Scroll-triggered staggered animation ---
   function setupScrollAnimations() {
       const animatedItems = document.querySelectorAll(
@@ -429,13 +426,46 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }
 
+  // --- Tabbed Sections Logic ---
+  function setupTabbedSections() {
+      console.log("Setting up tabbed sections...");
+      const tabs = document.querySelectorAll('.tab-section');
+      console.log("Found tab sections:", tabs.length);
+
+      if (tabs.length > 0) {
+          tabs.forEach(tab => {
+              const header = tab.querySelector('.tab-header');
+              const content = tab.querySelector('.tab-content');
+
+              if (header && content) {
+                  console.log("Attaching click event to tab header:", header.textContent);
+                  header.addEventListener('click', () => {
+                      const isActive = tab.classList.contains('active');
+                      tabs.forEach(t => t.classList.remove('active')); // Close all other tabs
+                      if (!isActive) {
+                          tab.classList.add('active');
+                          content.style.maxHeight = content.scrollHeight + 'px'; // Dynamic height
+                          console.log("Expanded tab:", header.textContent);
+                      } else {
+                          tab.classList.remove('active');
+                          content.style.maxHeight = '0'; // Collapse
+                          console.log("Collapsed tab:", header.textContent);
+                      }
+                  });
+              } else {
+                  console.warn("Tab header or content not found in tab:", tab);
+              }
+          });
+      } else {
+          console.warn("No tab sections found with class 'tab-section'.");
+      }
+  }
 
   // --- Initialize content and events when the DOM is fully loaded ---
   injectContent('components/nav.html', 'navigation', () => {
       console.log('Nav injected. Setting up hamburger and highlighting.');
       setupHamburgerAndMobileEvents();
       highlightActiveNav();
-      // Call setupDropdownSlideLinks AFTER nav is injected AND portfolio carousel exists
       if (typeof window.setupDropdownSlideLinks === 'function') {
           window.setupDropdownSlideLinks();
       } else {
@@ -446,16 +476,20 @@ document.addEventListener("DOMContentLoaded", () => {
   injectContent('components/carousel.html', 'carousel-placeholder', () => {
       console.log('Carousel injected. Setting up overlay.');
       setupCarouselOverlay();
-      if (typeof setupCarouselLoop === 'function') {
-          setupCarouselLoop();
+      if (typeof startCarouselLoop === 'function') {
+          startCarouselLoop();
       }
   });
 
-  injectContent('components/footer.html', 'page-footer');
+  injectContent('components/footer.html', 'page-footer', () => {
+      console.log('Footer injected.');
+      setupTabbedSections(); // Run tab setup after footer to ensure DOM is fully ready
+  });
 
   setupTestimonialCarousel();
   setupPortfolioCarousel();
   setupScrollAnimations();
+
 });
 
 // Define dummy functions if `carousel.js` isn't loaded (though it should be).
