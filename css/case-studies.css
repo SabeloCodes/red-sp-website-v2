@@ -13,39 +13,92 @@ html, body {
 /* -------------------- Tabbed Sections -------------------- */
 .case-study-tabs {
   width: 100%;
-  padding-top: 20px; /* Space below the injected carousel */
+  padding-top: 20px;
+  background-color: #f9f9f9;
+  border-top: 2px solid #ccc;
 }
 
 .tab-section {
-  padding: 40px 20px;
-  border-bottom: 1px solid #ccc;
-  transition: padding 0.3s ease;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .tab-header {
   cursor: pointer;
+  display: flex;
+  justify-content: flex-start;  /* Align to the left */
+  gap: 8px;                     /* Reduce space between heading and arrow */
+  align-items: center;
+  font-weight: bold;
   margin: 0;
-  color: var(--primary-color, #d22f2b); /* Match theme */
-  transition: color 0.3s ease;
+  padding: 20px 0;
+  background: #fff;
+  color: #d22f2b;
+  font-size: 1.1rem;
+  transition: background 0.3s, color 0.3s;
+  border: none;
 }
 
 .tab-header:hover {
-  color: #a51f1c;
+  background-color: #d22f2b;
+  color: #fff;
+}
+
+/* Toggle Arrow Button */
+.tab-toggle-arrow {
+  font-size: 6rem; /* Matches mini-carousel arrow size */
+  background: none;
+  border: none;
+  color: #d22f2b;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.tab-toggle-arrow:hover {
+  transform: scale(1.1);
+  color: #d22f2b;
+}
+
+.tab-section.active .tab-toggle-arrow {
+  transform: rotate(90deg);
 }
 
 .tab-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease-out; /* Ensure smooth transition */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.6s ease, opacity 0.4s ease, transform 0.4s ease;
+  padding: 0 16px;
 }
 
 .tab-section.active .tab-content {
-  max-height: 1000px; /* Fallback value, overridden by JS */
-  padding: 20px 0;
+  max-height: 2000px;
+  opacity: 1;
+  transform: translateY(0);
+  animation: bounceFadeIn 0.4s ease-out;
+  padding: 16px;
 }
 
-.tab-section.active {
-  padding-bottom: 80px;
+@keyframes bounceFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+  }
+  60% {
+    transform: translateY(5px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* -------------------- General Layout -------------------- */
@@ -151,14 +204,10 @@ html, body {
   }
 
   .tab-section {
-    padding: 20px 10px;
-  }
-
-  .tab-section.active {
-    padding-bottom: 40px;
+    margin-bottom: 16px;
   }
 
   .case-study-tabs {
-    padding-top: 10px; /* Reduced spacing on mobile */
+    padding-top: 10px;
   }
 }

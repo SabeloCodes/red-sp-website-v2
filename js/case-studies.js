@@ -4,15 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
   tabs.forEach(tab => {
     const header = tab.querySelector('.tab-header');
     const content = tab.querySelector('.tab-content');
+    const arrow = header.querySelector('.tab-toggle-arrow'); // Get the arrow inside the header
 
     header.addEventListener('click', () => {
       const isActive = tab.classList.contains('active');
-      tabs.forEach(t => t.classList.remove('active')); // Close all other tabs
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        const otherArrow = t.querySelector('.tab-toggle-arrow');
+        if (otherArrow) otherArrow.style.transform = 'rotate(0deg)'; // Reset all arrows
+      });
+
       if (!isActive) {
         tab.classList.add('active');
-        // Set max-height dynamically if needed, but 1000px is usually sufficient
+        if (arrow) arrow.style.transform = 'rotate(90deg)';
       } else {
         tab.classList.remove('active');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
       }
     });
   });
