@@ -30,15 +30,10 @@ html, body {
 .tab-header {
   cursor: pointer;
   display: flex;
-  justify-content: center;  /* Center .tab-header-inner horizontally */
-  gap: 8px;
+  justify-content: center; /* Center contents horizontally */
   align-items: center;
-  font-weight: bold;
-  margin: 0;
-  padding: 20px 0;
   background: #fff;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
+  padding: 20px 0;
   border: none;
 }
 
@@ -50,19 +45,23 @@ html, body {
   display: flex;
   align-items: center;
   gap: 24px; /* Adjust spacing between heading and arrow */
+  position: relative;
 }
 
 /* Toggle Arrow Button */
 .tab-toggle-arrow {
-  font-size: 12rem;
+  font-size: 6rem;
   background: none;
   border: none;
-  color: #333333; /* Initial dark grey */
+  color: #333;
   cursor: pointer;
-  margin-left: 12px;
   transition: transform 0.3s ease, color 0.3s ease;
   line-height: 1;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center;
 }
 
 .tab-toggle-arrow:hover {
