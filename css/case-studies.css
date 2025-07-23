@@ -30,30 +30,34 @@ html, body {
 .tab-header {
   cursor: pointer;
   display: flex;
-  justify-content: center;         /* Center horizontally */
-  align-items: center;             /* Center vertically */
-  gap: 16px;
+  justify-content: center;  /* Center .tab-header-inner horizontally */
+  gap: 8px;
+  align-items: center;
   font-weight: bold;
-  padding: 40px 0;                 /* Adjust as needed for vertical centering */
+  margin: 0;
+  padding: 20px 0;
   background: #fff;
-  color: #d22f2b;
-  font-size: 1.5rem;
-  transition: background 0.3s, color 0.3s;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
   border: none;
-  height: 120px;                   /* Fixed height ensures consistent vertical alignment */
 }
 
 .tab-header:hover {
-  background-color: #d22f2b;
-  color: #fff;
+  background-color: #fff; /* Keep white background */
+}
+
+.tab-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* Adjust spacing between heading and arrow */
 }
 
 /* Toggle Arrow Button */
 .tab-toggle-arrow {
-  font-size: 6rem; /* Matches mini-carousel arrow size */
+  font-size: 12rem;
   background: none;
   border: none;
-  color: #d22f2b;
+  color: #333333; /* Initial dark grey */
   cursor: pointer;
   margin-left: 12px;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -62,8 +66,8 @@ html, body {
 }
 
 .tab-toggle-arrow:hover {
+  color: #d22f2b; /* Turn red on hover */
   transform: scale(1.1);
-  color: #d22f2b;
 }
 
 .tab-section.active .tab-toggle-arrow {
