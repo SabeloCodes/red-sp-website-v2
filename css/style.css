@@ -1,3 +1,5 @@
+/* css/style.css */
+
 /* -------------------- Base -------------------- */
 html, body {
   margin: 0;
@@ -355,7 +357,7 @@ html, body {
   position: absolute; /* Ensure it overlays content correctly if needed */
   top: 0;
   left: 0;
-  width: 100%;  
+  width: 100%;
 }
 
 /* Hide the hamburger on desktop by default */
@@ -755,7 +757,7 @@ nav.main-nav ul li.dropdown .dropdown-menu li a:focus-visible {
 
   html, body {
     /* padding-top: 86px; Adjust for smaller logo + padding */
-  }  
+  }
 
   .logo img {
     height: 66px;

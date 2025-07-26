@@ -25,48 +25,56 @@ html, body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   overflow: hidden;
   transition: all 0.3s ease;
+  padding: 0;
 }
 
 .tab-header {
   cursor: pointer;
   display: flex;
-  justify-content: center; /* Center contents horizontally */
   align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
   background: #fff;
-  padding: 20px 0;
+  color: #333333;
+  font-size: 1.3rem;
+  font-weight: bold;
   border: none;
 }
 
 .tab-header:hover {
-  background-color: #fff; /* Keep white background */
+  background-color: #fff;
 }
 
 .tab-header-inner {
   display: flex;
   align-items: center;
-  gap: 24px; /* Adjust spacing between heading and arrow */
-  position: relative;
+  gap: 40px;
 }
 
 /* Toggle Arrow Button */
 .tab-toggle-arrow {
-  font-size: 6rem;
+  font-size: 9rem;
   background: none;
   border: none;
   color: #333;
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
-  line-height: 1;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transform-origin: center;
+  outline: none;
 }
 
 .tab-toggle-arrow:hover {
-  color: #d22f2b; /* Turn red on hover */
+  color: #d22f2b;
   transform: scale(1.1);
+}
+
+.tab-toggle-arrow:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .tab-section.active .tab-toggle-arrow {
@@ -114,6 +122,10 @@ html, body {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
+  background-color: transparent;
+  padding-right: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .case-study-row.two-col {
@@ -123,6 +135,8 @@ html, body {
 .case-study-text,
 .case-study-description {
   flex: 1 1 48%;
+  max-width: 48%;
+  word-wrap: break-word;
 }
 
 .case-study-text h3,
@@ -148,13 +162,10 @@ html, body {
 .dark-grey-section {
   background-color: #333333;
   color: #E6E6E6;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  padding: 80px 0;
-  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1100px;
 }
 
 .dark-grey-section .container {
@@ -189,6 +200,190 @@ html, body {
   max-width: none;
 }
 
+/* -------------------- Mini Carousel Adjustments -------------------- */
+.case-study-carousel.mini-carousel-overlay {
+  position: relative;
+  width: 100vw;
+  margin: 10px 0;
+  padding: 10px 0;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+  min-height: 400px;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transition: none;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  min-height: inherit;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-item {
+  width: calc((100% - (2 * 20px)) / 3);
+  flex-shrink: 0;
+  position: relative;
+  opacity: 0.4;
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  overflow: hidden;
+  height: 400px;
+  background: linear-gradient(135deg, #ebebeb 0%, #dcdcdc 100%);
+  border: none;
+  border-radius: 0;
+  display: block;
+  box-sizing: border-box;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-item.prev-active {
+  opacity: 0.4;
+  transform: scale(0.85);
+  order: 1;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-item.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  cursor: pointer;
+  order: 2;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-item.next-active {
+  opacity: 0.4;
+  transform: scale(0.85);
+  order: 3;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-item:not(.active):not(.prev-active):not(.next-active) {
+  display: none;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 0;
+  display: block;
+}
+
+.modal-active .case-study-carousel.mini-carousel-overlay .carousel-item.active img {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-arrow.mini-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 4.8rem;
+  color: #333333;
+  background: none;
+  border: none;
+  z-index: 10;
+  cursor: pointer;
+  padding: 0 15px;
+  transition: color 0.3s ease;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-arrow.mini-arrow:hover {
+  color: #d22f2b;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-arrow.prev.mini-arrow {
+  left: 20px;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-arrow.next.mini-arrow {
+  right: 20px;
+}
+
+/* Remove red focus border on arrows */
+.case-study-carousel.mini-carousel-overlay .carousel-arrow.mini-arrow:focus,
+.case-study-carousel.mini-carousel-overlay .carousel-arrow.mini-arrow:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .case-study-carousel.mini-carousel-overlay .carousel-arrow.mini-arrow {
+    font-size: 3.6rem;
+  }
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.case-study-carousel.mini-carousel-overlay .carousel-dot:hover,
+.case-study-carousel.mini-carousel-overlay .carousel-dot.active {
+  background-color: #D22F2B;
+}
+
+/* -------------------- Modal Gallery Styles -------------------- */
+#carousel-image-modal .modal-prev,
+#carousel-image-modal .modal-next {
+  font-size: 5.4rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+#carousel-image-modal .modal-prev:hover,
+#carousel-image-modal .modal-next:hover {
+  color: #d22f2b;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Remove red focus border on modal arrows */
+#carousel-image-modal .modal-prev:focus,
+#carousel-image-modal .modal-prev:focus-visible,
+#carousel-image-modal .modal-next:focus,
+#carousel-image-modal .modal-next:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+#carousel-image-modal .modal-prev { left: 10px; }
+#carousel-image-modal .modal-next { right: 10px; }
+
 /* -------------------- Responsive Adjustments -------------------- */
 @media screen and (max-width: 768px) {
   .case-study-row,
@@ -199,6 +394,7 @@ html, body {
   .case-study-text,
   .case-study-description {
     flex: 1 1 100%;
+    max-width: 100%;
   }
 
   .case-study-buttons {
@@ -210,7 +406,36 @@ html, body {
     margin-bottom: 16px;
   }
 
+  .tab-header {
+    padding: 8px 12px;
+    font-size: 1.2rem;
+  }
+
+  .tab-toggle-arrow {
+    font-size: 6rem;
+  }
+
   .case-study-tabs {
     padding-top: 10px;
+  }
+
+  .case-study-carousel.mini-carousel-overlay {
+    min-height: 300px;
+  }
+
+  .case-study-carousel.mini-carousel-overlay .carousel-item {
+    width: 100%;
+    height: 300px;
+    padding: 0;
+  }
+
+  .case-study-carousel.mini-carousel-overlay .carousel-item.prev-active,
+  .case-study-carousel.mini-carousel-overlay .carousel-item.next-active {
+    display: none;
+  }
+
+  .case-study-carousel.mini-carousel-overlay .carousel-item.active {
+    opacity: 1;
+    transform: scale(1);
   }
 }

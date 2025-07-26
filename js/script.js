@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   // --- Core Content Injection Function ---
   function injectContent(url, targetId, callback) {
       fetch(url)
@@ -252,153 +251,234 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }
 
-  // --- Portfolio Carousel Logic (for services page) ---
-  function setupPortfolioCarousel() {
-      const slides = document.querySelectorAll('.portfolio-slide');
-      const prevBtn = document.querySelector('.portfolio-prev');
-      const nextBtn = document.querySelector('.portfolio-next');
-      const dotsContainer = document.querySelector('.portfolio-dots');
+  // --- Tabbed Sections Logic ---
+  function setupTabbedSections() {
+      console.log("Setting up tabbed sections...");
+      const tabs = document.querySelectorAll('.tab-section');
+      console.log("Found tab sections:", tabs.length);
 
-      if (slides.length) {
-          let currentIndex = 0;
+      if (tabs.length > 0) {
+          tabs.forEach(tab => {
+              const header = tab.querySelector('.tab-header');
+              const content = tab.querySelector('.tab-content');
 
-          function showSlide(index) {
-              slides.forEach((slide, i) => {
-                  slide.classList.remove('active');
-                  slide.style.display = i === index ? 'block' : 'none';
-                  if (i === index) slide.classList.add('active');
-              });
-
-              if (dotsContainer) {
-                  const dots = dotsContainer.querySelectorAll('button');
-                  dots.forEach((dot, i) => {
-                      dot.classList.toggle('active', i === index);
-                  });
-              }
-          }
-
-          function createDots() {
-              if (dotsContainer && dotsContainer.children.length === 0) {
-                  slides.forEach((_, i) => {
-                      const dot = document.createElement('button');
-                      dot.classList.toggle('active', i === currentIndex);
-                      dot.addEventListener('click', () => {
-                          currentIndex = i;
-                          showSlide(currentIndex);
+              if (header && content) {
+                  console.log("Attaching click event to tab header:", header.textContent);
+                  header.addEventListener('click', () => {
+                      const isActive = tab.classList.contains('active');
+                      tabs.forEach(t => {
+                          t.classList.remove('active');
+                          const tc = t.querySelector('.tab-content');
+                          if (tc) tc.style.maxHeight = '0';
                       });
-                      dotsContainer.appendChild(dot);
+
+                      if (!isActive) {
+                          tab.classList.add('active');
+                          content.style.maxHeight = content.scrollHeight + 'px';
+                          console.log("Expanded tab:", header.textContent);
+
+                          const miniCarouselsInTab = content.querySelectorAll('.js-carousel');
+                          miniCarouselsInTab.forEach(carousel => {
+                              initializeSingleMiniCarousel(carousel);
+                          });
+                      } else {
+                          tab.classList.remove('active');
+                          content.style.maxHeight = '0';
+                          console.log("Collapsed tab:", header.textContent);
+                      }
                   });
-              }
-          }
 
-          createDots();
-
-          prevBtn?.addEventListener('click', () => {
-              currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-              showSlide(currentIndex);
-          });
-
-          nextBtn?.addEventListener('click', () => {
-              currentIndex = (currentIndex + 1) % slides.length;
-              showSlide(currentIndex);
-          });
-
-          showSlide(currentIndex);
-
-          // --- Submenu click links to specific slide (within Portfolio Carousel) ---
-          function setupDropdownSlideLinks() {
-              console.log('Setting up dropdown slide links');
-              const navLinks = document.querySelectorAll('#navigation .dropdown-menu a');
-              if (navLinks.length) {
-                  console.log('Found dropdown links:', navLinks);
-                  navLinks.forEach(link => {
-                      link.addEventListener('click', (e) => {
-                          console.log('Click detected on:', link.textContent);
-                          if (window.location.pathname.includes('services.html')) {
-                              e.preventDefault();
-                              const targetSlideId = link.getAttribute('href').split('#')[1];
-                              const targetSlide = document.getElementById(targetSlideId);
-                              if (targetSlide) {
-                                  const portfolioSection = document.getElementById('portfolio-section');
-                                  if (portfolioSection) {
-                                      portfolioSection.scrollIntoView({
-                                          behavior: 'smooth'
-                                      });
-                                      setTimeout(() => {
-                                          currentIndex = Array.from(slides).indexOf(targetSlide);
-                                          if (currentIndex !== -1) {
-                                              showSlide(currentIndex);
-                                              history.pushState(null, null, link.getAttribute('href'));
-                                              console.log('Slide activated:', targetSlideId);
-                                          } else {
-                                              console.log('Slide not found:', targetSlideId);
-                                          }
-                                      }, 600);
-                                  }
-                              } else {
-                                  window.location.href = link.getAttribute('href');
-                              }
-                          } else {
-                              window.location.href = link.getAttribute('href');
-                          }
+                  if (tab.classList.contains('active')) {
+                      content.style.maxHeight = content.scrollHeight + 'px';
+                      const miniCarouselsInTab = content.querySelectorAll('.js-carousel');
+                      miniCarouselsInTab.forEach(carousel => {
+                          initializeSingleMiniCarousel(carousel);
                       });
-                  });
+                  }
               } else {
-                  console.log('No dropdown links found inside #navigation for slide linking.');
+                  console.warn("Tab header or content not found in tab:", tab);
               }
-          }
-
-          // On page load: check URL hash for slide ID (for services.html)
-          const hash = window.location.hash;
-          if (hash && window.location.pathname.includes('services.html')) {
-              const targetSlideId = hash.substring(1);
-              const targetSlide = document.getElementById(targetSlideId);
-              if (targetSlide) {
-                  const portfolioSection = document.getElementById('portfolio-section');
-                  if (portfolioSection) {
-                      portfolioSection.scrollIntoView({
-                          behavior: 'smooth'
-                      });
-                      currentIndex = Array.from(slides).indexOf(targetSlide);
-                      setTimeout(() => showSlide(currentIndex), 100);
-                      console.log('Loaded slide from hash:', targetSlideId);
-                  }
-              }
-          }
-
-          // --- Touch Drag Support ---
-          let startX = 0;
-          let endX = 0;
-          const portfolioCarouselElement = document.querySelector('.portfolio-carousel');
-
-          if (portfolioCarouselElement) {
-              portfolioCarouselElement.addEventListener('touchstart', (e) => {
-                  startX = e.touches[0].clientX;
-              });
-
-              portfolioCarouselElement.addEventListener('touchend', (e) => {
-                  endX = e.changedTouches[0].clientX;
-                  handleSwipe();
-              });
-          }
-
-          function handleSwipe() {
-              const swipeThreshold = 50;
-              const diff = startX - endX;
-
-              if (Math.abs(diff) > swipeThreshold) {
-                  if (diff > 0) {
-                      currentIndex = (currentIndex + 1) % slides.length;
-                  } else {
-                      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                  }
-                  showSlide(currentIndex);
-              }
-          }
-          window.setupDropdownSlideLinks = setupDropdownSlideLinks; // Make globally accessible
+          });
       } else {
-          console.warn("Portfolio carousel elements or dots container not found. Portfolio carousel might not function.");
+          console.warn("No tab sections found with class 'tab-section'.");
       }
+  }
+
+  // --- Mini Carousel Initialization (for a single carousel instance) ---
+  function initializeSingleMiniCarousel(carousel) {
+      if (carousel.dataset.initialized) {
+          console.log("Mini carousel already initialized:", carousel);
+          return;
+      }
+
+      console.log("Initializing a single mini carousel:", carousel);
+      const track = carousel.querySelector('.carousel-track');
+      const items = Array.from(track.children).filter(el => el.classList.contains('carousel-item'));
+
+      if (items.length === 0) {
+          console.warn("No carousel items found in this mini carousel:", carousel);
+          return;
+      }
+
+      const prevButton = carousel.querySelector('.carousel-arrow.prev');
+      const nextButton = carousel.querySelector('.carousel-arrow.next');
+      const dotsContainer = carousel.querySelector('.carousel-dots');
+
+      let currentIndex = 0;
+      let modalIndex = 0;
+
+      const modal = document.getElementById('carousel-image-modal');
+      const modalImg = modal ? modal.querySelector('.carousel-modal-image') : null;
+      const modalCaption = modal ? modal.querySelector('.carousel-modal-caption') : null;
+      const closeModal = modal ? modal.querySelector('.carousel-modal-close') : null;
+      const modalPrev = modal ? modal.querySelector('.modal-prev') : null;
+      const modalNext = modal ? modal.querySelector('.modal-next') : null;
+
+      console.log("Modal elements:", { modal, modalImg, modalCaption, closeModal, modalPrev, modalNext });
+
+      const dots = [];
+      if (dotsContainer && dotsContainer.children.length === 0) {
+          items.forEach((_, i) => {
+              const dot = document.createElement('div');
+              dot.classList.add('carousel-dot');
+              dotsContainer.appendChild(dot);
+              dot.addEventListener('click', () => {
+                  currentIndex = i;
+                  updateCarousel();
+              });
+              dots.push(dot);
+          });
+      } else if (dotsContainer) {
+          dots.push(...Array.from(dotsContainer.children));
+      }
+
+      function openModal(index, sourceCarousel) {
+          if (!modal || !modalImg || !modalCaption) {
+              console.error("Modal elements not found for openModal function.");
+              return;
+          }
+          const item = Array.from(sourceCarousel.querySelectorAll('.carousel-item'))[index];
+          modalIndex = index;
+
+          const img = item.querySelector('img');
+          if (img && img.src) {
+              modalImg.src = img.src;
+              modalCaption.textContent = img.getAttribute('data-caption') || img.alt || '';
+              modal.classList.add('active');
+          } else {
+              console.error("Image not found for modal at index:", index, "Item:", item);
+          }
+      }
+
+      function closeModalView() {
+          if (modal) {
+              modal.classList.remove('active');
+          }
+      }
+
+      function showModalImage(index) {
+          if (!modalImg || !modalCaption) return;
+          const item = items[index];
+          const img = item.querySelector('img');
+          if (img && img.src) {
+              modalImg.src = img.src;
+              modalCaption.textContent = img.getAttribute('data-caption') || img.alt || '';
+          } else {
+              console.error("Image not found for modal at index:", index, "Item:", item);
+          }
+      }
+
+      if (closeModal) closeModal.addEventListener('click', closeModalView);
+      if (modal) {
+          modal.addEventListener('click', (e) => {
+              if (e.target === modal || e.target.classList.contains('carousel-modal-overlay')) {
+                  closeModalView();
+              }
+          });
+      }
+      if (modalNext) {
+          modalNext.addEventListener('click', () => {
+              modalIndex = (modalIndex + 1) % items.length;
+              showModalImage(modalIndex);
+          });
+      }
+      if (modalPrev) {
+          modalPrev.addEventListener('click', () => {
+              modalIndex = (modalIndex - 1 + items.length) % items.length;
+              showModalImage(modalIndex);
+          });
+      }
+
+      function updateCarousel() {
+          const total = items.length;
+          const prevIndex = (currentIndex - 1 + total) % total;
+          const nextIndex = (currentIndex + 1) % total;
+
+          console.log("Updating carousel, currentIndex:", currentIndex, "prevIndex:", prevIndex, "nextIndex:", nextIndex);
+
+          items.forEach((item, i) => {
+              item.classList.remove('active', 'prev-active', 'next-active');
+              item.style.opacity = '0.4';
+              item.style.pointerEvents = 'none';
+              item.onclick = null;
+              const img = item.querySelector('img');
+              if (img) img.style.display = 'block';
+          });
+
+          if (items[prevIndex]) {
+              items[prevIndex].classList.add('prev-active');
+              items[prevIndex].style.opacity = '0.4';
+              console.log("Set prev-active at index:", prevIndex);
+          }
+          if (items[currentIndex]) {
+              items[currentIndex].classList.add('active');
+              items[currentIndex].style.opacity = '1';
+              items[currentIndex].style.pointerEvents = 'auto';
+              items[currentIndex].onclick = (e) => {
+                  e.stopPropagation();
+                  openModal(currentIndex, carousel);
+              };
+              console.log("Set active at index:", currentIndex);
+          }
+          if (items[nextIndex]) {
+              items[nextIndex].classList.add('next-active');
+              items[nextIndex].style.opacity = '0.4';
+              console.log("Set next-active at index:", nextIndex);
+          }
+
+          dots.forEach((dot, i) => {
+              dot.classList.toggle('active', i === currentIndex);
+          });
+
+          items.forEach((item, i) => {
+              const img = item.querySelector('img');
+              if (img) {
+                  if (!img.complete) {
+                      console.warn(`Image at index ${i} not yet loaded: ${img.src}`);
+                      img.onload = () => { console.log(`Image at index ${i} loaded: ${img.src}`); updateCarousel(); };
+                      img.onerror = () => console.error(`Failed to load image at index ${i}: ${img.src}`);
+                  } else if (img.naturalWidth === 0) {
+                      console.error(`Image at index ${i} failed to load (naturalWidth 0): ${img.src}`);
+                  }
+              }
+          });
+      }
+
+      function nextSlide() {
+          currentIndex = (currentIndex + 1) % items.length;
+          updateCarousel();
+      }
+
+      function prevSlide() {
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          updateCarousel();
+      }
+
+      prevButton?.addEventListener('click', prevSlide);
+      nextButton?.addEventListener('click', nextSlide);
+
+      updateCarousel();
+      carousel.dataset.initialized = "true";
   }
 
   // --- Scroll-triggered staggered animation ---
@@ -426,51 +506,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }
 
-  // --- Tabbed Sections Logic ---
-  function setupTabbedSections() {
-      console.log("Setting up tabbed sections...");
-      const tabs = document.querySelectorAll('.tab-section');
-      console.log("Found tab sections:", tabs.length);
-
-      if (tabs.length > 0) {
-          tabs.forEach(tab => {
-              const header = tab.querySelector('.tab-header');
-              const content = tab.querySelector('.tab-content');
-
-              if (header && content) {
-                  console.log("Attaching click event to tab header:", header.textContent);
-                  header.addEventListener('click', () => {
-                      const isActive = tab.classList.contains('active');
-                      tabs.forEach(t => t.classList.remove('active')); // Close all other tabs
-                      if (!isActive) {
-                          tab.classList.add('active');
-                          content.style.maxHeight = content.scrollHeight + 'px'; // Dynamic height
-                          console.log("Expanded tab:", header.textContent);
-                      } else {
-                          tab.classList.remove('active');
-                          content.style.maxHeight = '0'; // Collapse
-                          console.log("Collapsed tab:", header.textContent);
-                      }
-                  });
-              } else {
-                  console.warn("Tab header or content not found in tab:", tab);
-              }
-          });
-      } else {
-          console.warn("No tab sections found with class 'tab-section'.");
-      }
-  }
-
   // --- Initialize content and events when the DOM is fully loaded ---
   injectContent('components/nav.html', 'navigation', () => {
       console.log('Nav injected. Setting up hamburger and highlighting.');
       setupHamburgerAndMobileEvents();
       highlightActiveNav();
-      if (typeof window.setupDropdownSlideLinks === 'function') {
-          window.setupDropdownSlideLinks();
-      } else {
-          console.warn("setupDropdownSlideLinks not found. Ensure setupPortfolioCarousel ran.");
-      }
   });
 
   injectContent('components/carousel.html', 'carousel-placeholder', () => {
@@ -483,13 +523,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   injectContent('components/footer.html', 'page-footer', () => {
       console.log('Footer injected.');
-      setupTabbedSections(); // Run tab setup after footer to ensure DOM is fully ready
+      setupTabbedSections();
   });
 
   setupTestimonialCarousel();
-  setupPortfolioCarousel();
-  setupScrollAnimations();
 
+  const initialActiveTab = document.querySelector('.tab-section.active');
+  if (initialActiveTab) {
+      const initialContent = initialActiveTab.querySelector('.tab-content');
+      if (initialContent) {
+          initialContent.style.maxHeight = initialContent.scrollHeight + 'px';
+          const miniCarouselsInInitialTab = initialContent.querySelectorAll('.js-carousel');
+          miniCarouselsInInitialTab.forEach(carousel => {
+              initializeSingleMiniCarousel(carousel);
+          });
+      }
+  }
 });
 
 // Define dummy functions if `carousel.js` isn't loaded (though it should be).
