@@ -26,6 +26,15 @@ body, html {
     margin-top: 10px;
     margin-bottom: 0;
   }
+
+  /* Slimline Heading Variant */
+  .heading-tab {
+    font-size: 26px;          /* Large but not oversized */
+    font-weight: 700;
+    line-height: 1.2;         /* Much smaller line height */
+    margin: 0;                /* Remove bottom margin */
+    padding: 0;               /* Prevent extra spacing */
+  }
   
   /* -------------------- Paragraphs -------------------- */
   

@@ -275,8 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
                       if (!isActive) {
                           tab.classList.add('active');
                           content.style.maxHeight = content.scrollHeight + 'px';
-                          console.log("Expanded tab:", header.textContent);
-
+                          console.log("Expanded tab:", header.textContent, "to height:", content.scrollHeight);
                           const miniCarouselsInTab = content.querySelectorAll('.js-carousel');
                           miniCarouselsInTab.forEach(carousel => {
                               initializeSingleMiniCarousel(carousel);
